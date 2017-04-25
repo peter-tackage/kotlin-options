@@ -1,4 +1,4 @@
-group 'com.moac.kotlinfunctionaloptions'
+group 'com.petertackage.kotlinfunctionaloptions'
 version '1.0-SNAPSHOT'
 
 buildscript {

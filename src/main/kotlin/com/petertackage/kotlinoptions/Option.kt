@@ -1,4 +1,4 @@
-package com.moac.kotlinoptions
+package com.petertackage.kotlinoptions
 
 sealed class Option<out T : Any> {
 
@@ -19,10 +19,7 @@ sealed class Option<out T : Any> {
     }
 
     fun isNone(): Boolean {
-        return when (this) {
-            is Option.Some -> false
-            is Option.None -> true
-        }
+        return !isSome()
     }
 
     fun ifSome(action: (T) -> Unit) {
@@ -162,6 +159,5 @@ sealed class Option<out T : Any> {
 //            is Option.None -> default
 //        }
 //    }
-
 
 }
