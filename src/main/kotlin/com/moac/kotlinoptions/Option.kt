@@ -165,14 +165,3 @@ sealed class Option<out T : Any> {
 
 
 }
-
-
-fun tester() {
-    val thingo: String? = null
-    Option.optionOf(thingo)
-            .map { it + "ending" }
-            .map { it.length }
-            .filter { it > 5 }
-            .ifSome { System.out.println(it) }
-
-}
