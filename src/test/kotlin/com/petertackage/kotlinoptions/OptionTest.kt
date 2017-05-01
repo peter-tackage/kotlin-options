@@ -65,4 +65,33 @@ class OptionTest {
 
         verify(mockAction, never()).invoke()
     }
+
+    @Test
+    fun `map invokes function with value when Some`() {
+        val value = "value"
+        val mockFunc: (String) -> Int = mock()
+
+        Option.optionOf(value).map(mockFunc)
+
+        verify(mockFunc).invoke(value)
+    }
+
+    @Test
+    fun `map return function value when Some`() {
+        val value = "value"
+        val mockFunc: (String) -> Int = { it.length }
+
+        val result: Option<Int> = Option.optionOf(value).map(mockFunc)
+
+        assertThat(result).isEqualTo(Option.optionOf(value.length))
+    }
+
+    @Test
+    fun `map does not perform action when None`() {
+        val mockFunc: (String) -> Int = mock()
+
+        Option.optionOf(null).map(mockFunc)
+
+        verify(mockFunc, never()).invoke(any())
+    }
 }
