@@ -152,4 +152,27 @@ class OptionTest {
 
         assertThat(result.isNone()).isTrue()
     }
+
+    @Test
+    fun `matchAction invokes someAction with value not noneAction when Some`() {
+        val value = "value"
+        val mockSomeAction: (String) -> Unit = mock()
+        val mockNoneAction: () -> Unit = mock()
+
+        Option.optionOf(value).matchAction(mockSomeAction, mockNoneAction)
+
+        verify(mockSomeAction).invoke(value)
+        verify(mockNoneAction, never()).invoke()
+    }
+
+    @Test
+    fun `matchAction invokes noneAction not someAction when None`() {
+        val mockSomeAction: (String) -> Unit = mock()
+        val mockNoneAction: () -> Unit = mock()
+
+        Option.optionOf(null).matchAction(mockSomeAction, mockNoneAction)
+
+        verify(mockNoneAction).invoke()
+        verify(mockSomeAction, never()).invoke(any())
+    }
 }
