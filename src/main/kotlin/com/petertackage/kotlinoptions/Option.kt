@@ -104,7 +104,6 @@ sealed class Option<out T : Any> {
     }
 
     override fun equals(other: Any?): Boolean {
-
         val otherOption: Option<Any> = optionOf(other)
 
         return when (otherOption) {

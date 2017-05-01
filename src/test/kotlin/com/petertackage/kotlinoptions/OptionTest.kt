@@ -239,7 +239,7 @@ class OptionTest {
     }
 
     @Test
-    fun `and does not invokes action when second is None`() {
+    fun `and does not invoke action when second is None`() {
         val option1 = Option.optionOf("1")
         val option2 = Option.optionOf(null)
         val action: (String, String) -> Unit = mock()
@@ -249,4 +249,84 @@ class OptionTest {
         verify(action, never()).invoke(any(), any())
     }
 
+    @Test
+    fun `equals returns true when both None`() {
+        val option1 = Option.optionOf(null)
+        val option2 = Option.optionOf(null)
+
+        assertThat(option1 == option2).isTrue()
+    }
+
+    @Test
+    fun `equals returns false when this Some other None`() {
+        val option1 = Option.optionOf("value")
+        val option2 = Option.optionOf(null)
+
+        assertThat(option1 == option2).isFalse()
+    }
+
+    @Test
+    fun `equals returns false when this None other Some`() {
+        val option1 = Option.optionOf(null)
+        val option2 = Option.optionOf("value")
+
+        assertThat(option1 == option2).isFalse()
+    }
+
+    @Test
+    fun `equals returns true when both same value`() {
+        val option1 = Option.optionOf("value")
+        val option2 = Option.optionOf("value")
+
+        assertThat(option1 == option2).isTrue()
+    }
+
+    @Test
+    fun `equals returns true when both same instance`() {
+        val value = "value"
+        val option1 = Option.optionOf(value)
+        val option2 = Option.optionOf(value)
+
+        assertThat(option1 == option2).isTrue()
+    }
+
+    @Test
+    fun `equals returns false when different types`() {
+        val option1 = Option.optionOf("value")
+        val option2 = Option.optionOf(1)
+
+        assertThat(option1 == option2).isFalse()
+    }
+
+    @Test
+    fun `hashCode is value hashCode when Some`() {
+        val value = "value"
+
+        val hashCode = Option.optionOf(value).hashCode()
+
+        assertThat(hashCode).isEqualTo(value.hashCode())
+    }
+
+    @Test
+    fun `hashCode is 0 when None`() {
+        val hashCode = Option.optionOf(null).hashCode()
+
+        assertThat(hashCode).isEqualTo(0)
+    }
+
+    @Test
+    fun `toString is value toString when Some`() {
+        val value = 1
+
+        val toString = Option.optionOf(value).toString()
+
+        assertThat(toString).isEqualTo(value.toString())
+    }
+
+    @Test
+    fun `toString is None when None`() {
+        val toString = Option.optionOf(null).toString()
+
+        assertThat(toString).isEqualTo("None")
+    }
 }
