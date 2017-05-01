@@ -81,7 +81,7 @@ class OptionTest {
         val value = "value"
         val mockFunc: (String) -> Int = { it.length }
 
-        val result: Option<Int> = Option.optionOf(value).map(mockFunc)
+        val result = Option.optionOf(value).map(mockFunc)
 
         assertThat(result).isEqualTo(Option.optionOf(value.length))
         assertThat(result.getUnsafe()).isEqualTo(value.length)
@@ -101,7 +101,7 @@ class OptionTest {
         val value = "value"
         val mockFunc: (String) -> Option<Int> = { Option.optionOf(it.length) }
 
-        val result: Option<Int> = Option.optionOf(value).flatmap(mockFunc)
+        val result = Option.optionOf(value).flatmap(mockFunc)
 
         assertThat(result).isEqualTo(Option.optionOf(value.length))
     }
@@ -119,7 +119,36 @@ class OptionTest {
     fun `flatmap returns None when None`() {
         val mockFunc: (String) -> Option<Int> = mock()
 
-        val result: Option<Int> = Option.optionOf(null).flatmap(mockFunc)
+        val result = Option.optionOf(null).flatmap(mockFunc)
+
+        assertThat(result.isNone()).isTrue()
+    }
+
+    @Test
+    fun `filter returns Some when matches filter`() {
+        val filterPred: (String) -> Boolean = { it == "value" }
+
+        val result = Option.optionOf("value").filter(filterPred)
+
+        assertThat(result.isSome()).isTrue()
+    }
+
+    @Test
+    fun `filter returns value when matches filter`() {
+        val value = "value"
+        val filterPred: (String) -> Boolean = { it == value }
+
+        val result = Option.optionOf(value).filter(filterPred)
+
+        assertThat(result).isEqualTo(Option.optionOf(value))
+        assertThat(result.getUnsafe()).isEqualTo(value)
+    }
+
+    @Test
+    fun `filter returns None when does not match filter`() {
+        val filterPred: (String) -> Boolean = { it == "not value" }
+
+        val result = Option.optionOf("value").filter(filterPred)
 
         assertThat(result.isNone()).isTrue()
     }
