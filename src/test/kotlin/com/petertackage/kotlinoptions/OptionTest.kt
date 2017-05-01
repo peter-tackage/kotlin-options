@@ -1,9 +1,6 @@
 package com.petertackage.kotlinoptions
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.never
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -217,6 +214,39 @@ class OptionTest {
         val result = Option.optionOf(null).match(someFunction, noneFunction)
 
         assertThat(result).isEqualTo(6)
+    }
+
+    @Test
+    fun `and invokes action with values when both Some`() {
+        val option1 = Option.optionOf("1")
+        val option2 = Option.optionOf("2")
+        val action: (String, String) -> Unit = mock()
+
+        option1.and(option2, action)
+
+        verify(action).invoke("1", "2")
+    }
+
+    @Test
+    fun `and does not invoke action when first is None`() {
+        val option1 = Option.optionOf(null)
+        val option2 = Option.optionOf("2")
+        val action: (String, String) -> Unit = mock()
+
+        option1.and(option2, action)
+
+        verify(action, never()).invoke(any(), any())
+    }
+
+    @Test
+    fun `and does not invokes action when second is None`() {
+        val option1 = Option.optionOf("1")
+        val option2 = Option.optionOf(null)
+        val action: (String, String) -> Unit = mock()
+
+        option1.and(option2, action)
+
+        verify(action, never()).invoke(any(), any())
     }
 
 }
