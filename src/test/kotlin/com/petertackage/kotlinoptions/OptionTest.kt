@@ -217,7 +217,7 @@ class OptionTest {
     }
 
     @Test
-    fun `and invokes action with values when both Some`() {
+    fun `and invokes action with values when both Options are Some`() {
         val option1 = Option.optionOf("1")
         val option2 = Option.optionOf("2")
         val action: (String, String) -> Unit = mock()
@@ -228,7 +228,7 @@ class OptionTest {
     }
 
     @Test
-    fun `and does not invoke action when first is None`() {
+    fun `and does not invoke action when first Option is None`() {
         val option1 = Option.optionOf(null)
         val option2 = Option.optionOf("2")
         val action: (String, String) -> Unit = mock()
@@ -239,7 +239,7 @@ class OptionTest {
     }
 
     @Test
-    fun `and does not invoke action when second is None`() {
+    fun `and does not invoke action when second Option is None`() {
         val option1 = Option.optionOf("1")
         val option2 = Option.optionOf(null)
         val action: (String, String) -> Unit = mock()
@@ -247,6 +247,38 @@ class OptionTest {
         option1.and(option2, action)
 
         verify(action, never()).invoke(any(), any())
+    }
+
+    @Test
+    fun `id returns Option this when Some`() {
+
+        val result = Option.optionOf("value").id()
+
+        assertThat(result.id()).isEqualTo(result)
+    }
+
+    @Test
+    fun `id returns Option this when None`() {
+
+        val result = Option.optionOf(null).id()
+
+        assertThat(result.id()).isEqualTo(result)
+    }
+
+    @Test
+    fun `getUnsafe returns value when Some`() {
+        val value = "value"
+
+        val result = Option.optionOf(value).getUnsafe()
+
+        assertThat(result).isEqualTo(value)
+    }
+
+    @Test
+    fun `equals returns true when self`() {
+        val option1 = Option.optionOf(null)
+
+        assertThat(option1 == option1).isTrue()
     }
 
     @Test
