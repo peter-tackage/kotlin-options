@@ -77,21 +77,50 @@ class OptionTest {
     }
 
     @Test
-    fun `map return function value when Some`() {
+    fun `map returns function value when Some`() {
         val value = "value"
         val mockFunc: (String) -> Int = { it.length }
 
         val result: Option<Int> = Option.optionOf(value).map(mockFunc)
 
         assertThat(result).isEqualTo(Option.optionOf(value.length))
+        assertThat(result.getUnsafe()).isEqualTo(value.length)
     }
 
     @Test
-    fun `map does not perform action when None`() {
+    fun `map does not invoke function when None`() {
         val mockFunc: (String) -> Int = mock()
 
         Option.optionOf(null).map(mockFunc)
 
         verify(mockFunc, never()).invoke(any())
+    }
+
+    @Test
+    fun `flatmap returns function value when Some`() {
+        val value = "value"
+        val mockFunc: (String) -> Option<Int> = { Option.optionOf(it.length) }
+
+        val result: Option<Int> = Option.optionOf(value).flatmap(mockFunc)
+
+        assertThat(result).isEqualTo(Option.optionOf(value.length))
+    }
+
+    @Test
+    fun `flatmap does not invoke function value when None`() {
+        val mockFunc: (String) -> Option<Int> = mock()
+
+        Option.optionOf(null).flatmap(mockFunc)
+
+        verify(mockFunc, never()).invoke(any())
+    }
+
+    @Test
+    fun `flatmap returns None when None`() {
+        val mockFunc: (String) -> Option<Int> = mock()
+
+        val result: Option<Int> = Option.optionOf(null).flatmap(mockFunc)
+
+        assertThat(result.isNone()).isTrue()
     }
 }
