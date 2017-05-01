@@ -251,7 +251,6 @@ class OptionTest {
 
     @Test
     fun `id returns Option this when Some`() {
-
         val result = Option.optionOf("value").id()
 
         assertThat(result.id()).isEqualTo(result)
@@ -259,7 +258,6 @@ class OptionTest {
 
     @Test
     fun `id returns Option this when None`() {
-
         val result = Option.optionOf(null).id()
 
         assertThat(result.id()).isEqualTo(result)
