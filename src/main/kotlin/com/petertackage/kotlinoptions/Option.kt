@@ -62,8 +62,8 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun <R> match(someFunction: (T) -> R, noneFunction: () -> R) {
-        when (this) {
+    fun <R> match(someFunction: (T) -> R, noneFunction: () -> R) : R {
+        return when (this) {
             is Option.Some -> someFunction(value)
             is Option.None -> noneFunction()
         }

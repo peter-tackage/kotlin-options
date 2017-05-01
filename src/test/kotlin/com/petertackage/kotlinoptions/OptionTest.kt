@@ -175,4 +175,48 @@ class OptionTest {
         verify(mockNoneAction).invoke()
         verify(mockSomeAction, never()).invoke(any())
     }
+
+    @Test
+    fun `match invokes someFunction with value not noneFunction when Some`() {
+        val value = "value"
+        val mockSomeFunction: (String) -> Int = mock()
+        val mockNoneFunction: () -> Int = mock()
+
+        Option.optionOf(value).match(mockSomeFunction, mockNoneFunction)
+
+        verify(mockSomeFunction).invoke(value)
+        verify(mockNoneFunction, never()).invoke()
+    }
+
+    @Test
+    fun `match returns someFunction result when Some`() {
+        val mockSomeFunction: (String) -> Int = { 6 }
+        val mockNoneFunction: () -> Int = mock()
+
+        val result = Option.optionOf("value").match(mockSomeFunction, mockNoneFunction)
+
+        assertThat(result).isEqualTo(6)
+    }
+
+    @Test
+    fun `match invokes noneFunction not someFunction when None`() {
+        val mockSomeFunction: (String) -> Int = mock()
+        val mockNoneFunction: () -> Int = mock()
+
+        Option.optionOf(null).match(mockSomeFunction, mockNoneFunction)
+
+        verify(mockNoneFunction).invoke()
+        verify(mockSomeFunction, never()).invoke(any())
+    }
+
+    @Test
+    fun `match returns noneFunction result when None`() {
+        val mockSomeFunction: (String) -> Int = mock()
+        val mockNoneFunction: () -> Int = { 6 }
+
+        val result = Option.optionOf(null).match(mockSomeFunction, mockNoneFunction)
+
+        assertThat(result).isEqualTo(6)
+    }
+
 }
