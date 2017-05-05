@@ -62,7 +62,7 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun <R> match(someFunction: (T) -> R, noneFunction: () -> R) : R {
+    fun <R> match(someFunction: (T) -> R, noneFunction: () -> R): R {
         return when (this) {
             is Option.Some -> someFunction(value)
             is Option.None -> noneFunction()
@@ -104,14 +104,14 @@ sealed class Option<out T : Any> {
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherOption: Option<Any> = optionOf(other)
 
-        return when (otherOption) {
-            is Option.Some -> when (this) {
-                is Option.Some -> otherOption.asType(Some::class.java).getUnsafe() == otherOption.value
+        return when (other) {
+            is Option.Some<*> -> when (this) {
+                is Option.Some -> other.asType(Some::class.java).getUnsafe() == other.value
                 is Option.None -> false
             }
-            is Option.None -> this == Option.None
+            is Option.None -> this === Option.None
+            else -> false
         }
     }
 
