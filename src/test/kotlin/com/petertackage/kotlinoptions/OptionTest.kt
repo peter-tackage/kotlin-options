@@ -312,12 +312,27 @@ class OptionTest {
     }
 
     @Test
-    fun `equals returns true when both same instance`() {
+    fun `equals returns true when both same Some instance`() {
+        val value = "value"
+        val option = Option.optionOf(value)
+
+        assertThat(option == option).isTrue()
+    }
+
+    @Test
+    fun `equals returns true when both same value instance`() {
         val value = "value"
         val option1 = Option.optionOf(value)
         val option2 = Option.optionOf(value)
 
         assertThat(option1 == option2).isTrue()
+    }
+
+    @Test
+    fun `equals returns true when both same None instance`() {
+        val option = Option.optionOf(null)
+
+        assertThat(option == option).isTrue()
     }
 
     @Test
@@ -338,10 +353,11 @@ class OptionTest {
     }
 
     @Test
-    fun `hashCode is 0 when None`() {
-        val hashCode = Option.optionOf(null).hashCode()
+    fun `hashCode is constant when None`() {
+        val hashCode1 = Option.optionOf(null).hashCode()
+        val hashCode2 = Option.optionOf(null).hashCode()
 
-        assertThat(hashCode).isEqualTo(0)
+        assertThat(hashCode1).isEqualTo(hashCode2)
     }
 
     @Test
@@ -350,7 +366,7 @@ class OptionTest {
 
         val toString = Option.optionOf(value).toString()
 
-        assertThat(toString).isEqualTo(value.toString())
+        assertThat(toString).isEqualTo("Some(value=1)")
     }
 
     @Test
