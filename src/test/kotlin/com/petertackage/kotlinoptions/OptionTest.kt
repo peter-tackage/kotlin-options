@@ -10,7 +10,7 @@ class OptionTest {
 
     @Rule
     @JvmField
-    public var thrown = ExpectedException.none()
+    var thrown = ExpectedException.none()
 
     @Test
     fun `isSome returns true when no-nnull value`() {
