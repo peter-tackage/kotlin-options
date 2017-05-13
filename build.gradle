@@ -1,4 +1,4 @@
-group 'com.petertackage.kotlinfunctionaloptions'
+group 'com.petertackage.kotlinoptions'
 version '1.0-SNAPSHOT'
 
 buildscript {
