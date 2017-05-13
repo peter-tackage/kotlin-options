@@ -1,5 +1,5 @@
 group 'com.petertackage.kotlinoptions'
-version '1.0-SNAPSHOT'
+version '0.1-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.1.2-3'
@@ -18,9 +18,9 @@ repositories {
     mavenCentral()
 }
 
-allprojects {
-    sourceCompatibility = JavaVersion.VERSION_1_6
-    targetCompatibility = JavaVersion.VERSION_1_6
+// Not strictly necessary, because we have no Java source and by default the Kotlin compiler produces 1.6 bytecode
+tasks.withType(JavaCompile) {
+    sourceCompatibility = JavaVersion.VERSION_1_6; targetCompatibility = JavaVersion.VERSION_1_6
 }
 
 dependencies {
