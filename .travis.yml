@@ -7,5 +7,6 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+# Requires JDK 8 due to https://youtrack.jetbrains.com/issue/KT-17866
 jdk:
   - oraclejdk8
