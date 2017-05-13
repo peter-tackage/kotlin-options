@@ -2,7 +2,7 @@ group 'com.petertackage.kotlinfunctionaloptions'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.1'
+    ext.kotlin_version = '1.1.2-2'
     repositories {
         mavenCentral()
     }
