@@ -103,35 +103,9 @@ sealed class Option<out T : Any> {
     fun getUnsafe(): T {
         return when (this) {
             is Option.Some -> value
-            is Option.None -> throw IllegalStateException("Option is NONE")
+            is Option.None -> throw IllegalStateException("Attempt to unsafely access value when Option is NONE")
         }
     }
-//
-//    override fun equals(other: Any?): Boolean {
-//        return when (other) {
-//            is Option.Some<*> -> when (this) {
-//                is Option.Some -> other.asType(Some::class.java).getUnsafe() == other.value
-//                is Option.None -> false
-//                else -> false
-//            }
-//            is Option.None -> this === Option.None
-//            else -> false
-//        }
-//    }
-//
-//    override fun hashCode(): Int {
-//        return when (this) {
-//            is Option.Some -> value.hashCode()
-//            is Option.None -> 0
-//        }
-//    }
-//
-//    override fun toString(): String {
-//        return when (this) {
-//            is Option.Some -> value.toString()
-//            is Option.None -> "None"
-//        }
-//    }
 
     // TODO Fix generic issues
 

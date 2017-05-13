@@ -2,9 +2,15 @@ package com.petertackage.kotlinoptions
 
 import com.nhaarman.mockito_kotlin.*
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExpectedException
 
 class OptionTest {
+
+    @Rule
+    @JvmField
+    public var thrown = ExpectedException.none()
 
     @Test
     fun `isSome returns true when no-nnull value`() {
@@ -270,6 +276,14 @@ class OptionTest {
         val result = Option.optionOf(value).getUnsafe()
 
         assertThat(result).isEqualTo(value)
+    }
+
+    @Test
+    fun `getUnsafe throws IllegalStateException when None`() {
+        thrown.expect(IllegalStateException::class.java)
+        thrown.expectMessage("Attempt to unsafely access value when Option is NONE")
+
+        Option.optionOf(null).getUnsafe()
     }
 
     @Test
