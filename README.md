@@ -32,7 +32,7 @@ Transform the value by chaining functional operators as required:
 
 ## Download
 
-Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.1)
+Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.1).
 
 ## Feedback Welcomed!
 
