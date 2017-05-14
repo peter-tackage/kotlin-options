@@ -30,6 +30,10 @@ Transform the value by chaining functional operators as required:
             .matchAction( { log(it) }, { log("No user to login!") })
 ```
 
+## Feedback Welcomed!
+
+I'm relatively new to writing to Kotlin, so if you have suggestions for improvements then I'd be glad to hear from you!
+
 ## Alternatives
 
 The API of this library was inspired by the [Options](https://github.com/tomaszpolanski/Options) library written by [Tomek Polanski](https://twitter.com/tpolansk).
