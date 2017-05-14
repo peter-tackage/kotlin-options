@@ -8,7 +8,7 @@ Options in Kotlin using sealed classes.
 
 Kotlin has nullable types, however, the use of `null` as a value is not supported in some popular libraries, such as RxJava 2. This means that another way of representing the absence of a value is required.
 
-This mini-library allows you to represent the absence of a value without worrying about nulls and provides functional operators to transform the value.
+This mini-library allows you to safely represent the absence of a value without nulls and provides functional operators to transform the value.
 
 ## Usage:
 
@@ -31,6 +31,10 @@ Transform the value by chaining functional operators as required:
             .map { "Logged in user: $it" }
             .matchAction( { log(it) }, { log("No user to login!") })
 ```
+
+## Download
+
+Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.1)
 
 ## Feedback Welcomed!
 
