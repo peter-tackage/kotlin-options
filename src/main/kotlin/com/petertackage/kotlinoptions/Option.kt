@@ -107,34 +107,4 @@ sealed class Option<out T : Any> {
         }
     }
 
-    // TODO Fix generic issues
-
-//    fun orOption(optionFunc: () -> Option<T>): Option<T> {
-//        return when (this) {
-//            is Option.Some -> this
-//            is Option.None -> optionFunc()
-//        }
-//    }
-//
-//    fun orOption(option: Option<T>): Option<T> {
-//        return when (this) {
-//            is Option.Some -> this
-//            is Option.None -> option
-//        }
-//    }
-//
-//    fun orDefault(default: () -> T): T {
-//        return when (this) {
-//            is Option.Some -> this.value
-//            is Option.None -> default()
-//        }
-//    }
-//
-//    fun orDefault(default: T): T {
-//        return when (this) {
-//            is Option.Some -> this
-//            is Option.None -> default
-//        }
-//    }
-
 }
