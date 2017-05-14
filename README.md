@@ -40,7 +40,7 @@ I'm relatively new to writing to Kotlin, so if you have suggestions for improvem
 
 ## Alternatives
 
-The API of this library was inspired by the [Options](https://github.com/tomaszpolanski/Options) library written by [Tomek Polanski](https://twitter.com/tpolansk).
+The API of this library was inspired by the Java 6 compatible [Options](https://github.com/tomaszpolanski/Options) library written by [Tomek Polanski](https://twitter.com/tpolansk).
 
 ## License
 
