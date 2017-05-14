@@ -1,8 +1,6 @@
 # Kotlin Functional Options
 
-[![Build Status](https://travis-ci.org/peter-tackage/kotlin-options.svg?branch=master)](https://travis-ci.org/peter-tackage/kotlin-options)
-
-[![Release](https://jitpack.io/v/peter-tackage/kotlin-options.svg)](https://jitpack.io/#peter-tackage/kotlin-options)
+[![Build Status](https://travis-ci.org/peter-tackage/kotlin-options.svg?branch=master)](https://travis-ci.org/peter-tackage/kotlin-options) [![Release](https://jitpack.io/v/peter-tackage/kotlin-options.svg)](https://jitpack.io/#peter-tackage/kotlin-options)
 
 Options in Kotlin using sealed classes.
 
