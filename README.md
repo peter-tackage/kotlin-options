@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/peter-tackage/kotlin-options.svg?branch=master)](https://travis-ci.org/peter-tackage/kotlin-options)
 
+[![Release](https://jitpack.io/v/peter-tackage/kotlin-options.svg)](https://jitpack.io/#peter-tackage/kotlin-options)
+
 Options in Kotlin using sealed classes.
 
 Kotlin has nullable types, however, the use of `null` as a value is not supported in some popular libraries, such as RxJava 2. This means that another way of representing the absence of a value is required.
