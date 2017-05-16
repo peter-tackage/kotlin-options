@@ -103,7 +103,7 @@ sealed class Option<out T : Any> {
     fun getUnsafe(): T {
         return when (this) {
             is Option.Some -> value
-            is Option.None -> throw IllegalStateException("Attempt to unsafely access value when Option is NONE")
+            is Option.None -> throw IllegalStateException("Attempt to unsafely access value when Option is None")
         }
     }
 

@@ -286,7 +286,7 @@ class OptionTest {
     @Test
     fun `getUnsafe throws IllegalStateException when None`() {
         thrown.expect(IllegalStateException::class.java)
-        thrown.expectMessage("Attempt to unsafely access value when Option is NONE")
+        thrown.expectMessage("Attempt to unsafely access value when Option is None")
 
         Option.optionOf(null).getUnsafe()
     }
