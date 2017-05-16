@@ -13,7 +13,7 @@ class OptionTest {
     var thrown = ExpectedException.none()
 
     @Test
-    fun `isSome returns true when no-nnull value`() {
+    fun `isSome returns true when non-null value`() {
         assertThat(Option.optionOf("value").isSome()).isTrue()
     }
 
