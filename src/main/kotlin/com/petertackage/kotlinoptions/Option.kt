@@ -9,7 +9,7 @@ sealed class Option<out T : Any> {
     }
 
     private data class Some<out T : Any>(val value: T) : Option<T>()
-    private object None : Option<Nothing>() {
+    object None : Option<Nothing>() {
         override fun toString(): String {
             return "None"
         }
