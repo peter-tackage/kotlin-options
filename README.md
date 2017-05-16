@@ -42,6 +42,11 @@ I'm relatively new to writing to Kotlin, so if you have suggestions for improvem
 
 The API of this library was inspired by the Java 6 compatible [Options](https://github.com/tomaszpolanski/Options) library written by [Tomek Polanski](https://twitter.com/tpolansk).
 
+## Acknowledgements
+
+Brought to you by the power of the [Chilicorn](http://spiceprogram.org/chilicorn-history/) and the [Futurice Open Source Program](http://spiceprogram.org/).
+
+![Chilicorn Logo](https://raw.githubusercontent.com/futurice/spiceprogram/gh-pages/assets/img/logo/chilicorn_no_text-256.png)
 ## License
 
     Copyright 2017 Peter Tackage
