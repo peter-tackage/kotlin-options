@@ -109,7 +109,7 @@ class OptionTest {
         val value = "value"
         val function: (String) -> Option<Int> = { Option.optionOf(it.length) }
 
-        val result = Option.optionOf(value).flatmap(function)
+        val result = Option.optionOf(value).flatMap(function)
 
         assertThat(result).isEqualTo(Option.optionOf(value.length))
     }
@@ -118,7 +118,7 @@ class OptionTest {
     fun `flatmap does not invoke function value when None`() {
         val function: (String) -> Option<Int> = mock()
 
-        Option.optionOf(null).flatmap(function)
+        Option.optionOf(null).flatMap(function)
 
         verify(function, never()).invoke(any())
     }
@@ -127,7 +127,7 @@ class OptionTest {
     fun `flatmap returns None when None`() {
         val function: (String) -> Option<Int> = mock()
 
-        val result = Option.optionOf(null).flatmap(function)
+        val result = Option.optionOf(null).flatMap(function)
 
         assertThat(result.isNone()).isTrue()
     }
@@ -261,20 +261,6 @@ class OptionTest {
     }
 
     @Test
-    fun `id returns Option this when Some`() {
-        val result = Option.optionOf("value").id()
-
-        assertThat(result.id()).isEqualTo(result)
-    }
-
-    @Test
-    fun `id returns Option this when None`() {
-        val result = Option.optionOf(null).id()
-
-        assertThat(result.id()).isEqualTo(result)
-    }
-
-    @Test
     fun `getUnsafe returns value when Some`() {
         val value = "value"
 
@@ -394,4 +380,24 @@ class OptionTest {
 
         assertThat(toString).isEqualTo("None")
     }
+
+    @Test
+    fun `toNullable when non-null value`() {
+        val nullable: String? = Option.optionOf("value")
+                .toNullable()
+
+        val expected: String? = "value"
+        assertThat(nullable).isEqualTo(expected)
+    }
+
+    @Test
+    fun `toNullable when null value`() {
+        val nullable: String? = Option.optionOf(null)
+                .toNullable()
+
+        val expected: String? = null
+        assertThat(nullable).isEqualTo(expected)
+    }
+
+
 }

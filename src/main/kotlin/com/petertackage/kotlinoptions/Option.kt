@@ -45,7 +45,7 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun <R : Any> flatmap(mapper: (T) -> Option<R>): Option<R> {
+    fun <R : Any> flatMap(mapper: (T) -> Option<R>): Option<R> {
         return when (this) {
             is Option.Some -> mapper(value)
             is Option.None -> this
@@ -96,14 +96,17 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun id(): Option<T> {
-        return this
-    }
-
     fun getUnsafe(): T {
         return when (this) {
             is Option.Some -> value
             is Option.None -> throw IllegalStateException("Attempt to unsafely access value when Option is None")
+        }
+    }
+
+    fun toNullable(): T? {
+        return when (this) {
+            is Option.Some -> value
+            is Option.None -> null
         }
     }
 
