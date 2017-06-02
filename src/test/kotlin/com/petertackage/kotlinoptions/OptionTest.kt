@@ -383,19 +383,21 @@ class OptionTest {
 
     @Test
     fun `toNullable when non-null value`() {
+        val expected: String? = "value"
+
         val nullable: String? = Option.optionOf("value")
                 .toNullable()
 
-        val expected: String? = "value"
         assertThat(nullable).isEqualTo(expected)
     }
 
     @Test
     fun `toNullable when null value`() {
+        val expected: String? = null
+
         val nullable: String? = Option.optionOf(null)
                 .toNullable()
 
-        val expected: String? = null
         assertThat(nullable).isEqualTo(expected)
     }
 
