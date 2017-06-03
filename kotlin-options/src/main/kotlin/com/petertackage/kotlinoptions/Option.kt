@@ -1,8 +1,7 @@
 package com.petertackage.kotlinoptions
 
-fun <T : Any> optionOf(value: T?): Option<T> {
-    return if (value == null) Option.None else Option.Some(value)
-}
+fun <T : Any> optionOf(value: T?): Option<T> =
+        if (value == null) Option.None else Option.Some(value)
 
 sealed class Option<out T : Any> {
 

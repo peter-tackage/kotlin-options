@@ -1,2 +1,3 @@
 include ':kotlin-options'
 include ':kotlin-options-assertions'
+include ':kotlin-options-rxjava2-extensions'
