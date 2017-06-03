@@ -1,0 +1,16 @@
+group 'com.petertackage.kotlinoptions.assertions'
+version '0.3'
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "com.github.peter-tackage:kotlin-options:$version"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile 'junit:junit:4.11'
+}
