@@ -5,35 +5,59 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 
+/*
+ * filterIfSome
+ */
+
 fun <T : Any> Observable<Option<T>>.filterIfSome(): Observable<T> {
-    return this.filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it.isSome() }.map { it.getUnsafe() }
+}
+
+fun <T : Any> Observable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Observable<T> {
+    return filterIfSome().filter(predicate)
 }
 
 fun <T : Any> Flowable<Option<T>>.filterIfSome(): Flowable<T> {
-    return this.filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it.isSome() }.map { it.getUnsafe() }
+}
+
+fun <T : Any> Flowable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Flowable<T> {
+    return filterIfSome().filter(predicate)
 }
 
 fun <T : Any> Single<Option<T>>.filterIfSome(): Maybe<T> {
-    return this.filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it.isSome() }.map { it.getUnsafe() }
+}
+
+fun <T : Any> Single<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> {
+    return filterIfSome().filter(predicate)
 }
 
 fun <T : Any> Maybe<Option<T>>.filterIfSome(): Maybe<T> {
-    return this.filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it.isSome() }.map { it.getUnsafe() }
 }
 
+fun <T : Any> Maybe<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> {
+    return filterIfSome().filter(predicate)
+}
+
+/*
+ * filterIfNone
+ */
+
 fun <T : Any> Observable<Option<T>>.filterIfNone(): Observable<Unit> {
-    return this.filter { it.isNone() }.map { Unit }
+    return filter { it.isNone() }.map { Unit }
 }
 
 fun <T : Any> Flowable<Option<T>>.filterIfNone(): Flowable<Unit> {
-    return this.filter { it.isNone() }.map { Unit }
+    return filter { it.isNone() }.map { Unit }
 }
 
 fun <T : Any> Single<Option<T>>.filterIfNone(): Maybe<Unit> {
-    return this.filter { it.isNone() }.map { Unit }
+    return filter { it.isNone() }.map { Unit }
 }
 
 fun <T : Any> Maybe<Option<T>>.filterIfNone(): Maybe<Unit> {
-    return this.filter { it.isNone() }.map { Unit }
+    return filter { it.isNone() }.map { Unit }
 }
 

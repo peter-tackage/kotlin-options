@@ -23,10 +23,41 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome on Observable excludes when None`() {
-        val option = optionOf(null)
-
-        Observable.just(option)
+        Observable.just(optionOf(null))
                 .filterIfSome()
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Observable includes when Some and predicate True`() {
+        val value = "abc"
+        Observable.just(optionOf(value))
+                .filterIfSome { true }
+                .test()
+                .assertValue(value)
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Observable excludes when Some and predicate False`() {
+        Observable.just(optionOf("abc"))
+                .filterIfSome { false }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Observable excludes when None and predicate True`() {
+        Observable.just(optionOf(null))
+                .filterIfSome { true }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Observable excludes when None and predicate False`() {
+        Observable.just(optionOf("abc"))
+                .filterIfSome { false }
                 .test()
                 .assertNoValues()
     }
@@ -51,6 +82,39 @@ class RxJava2ExtensionsTest {
     }
 
     @Test
+    fun `filterIfSome with predicate on Flowable includes when Some and predicate True`() {
+        val value = "abc"
+        Flowable.just(optionOf(value))
+                .filterIfSome { true }
+                .test()
+                .assertValue(value)
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Flowable excludes when Some and predicate False`() {
+        Flowable.just(optionOf("abc"))
+                .filterIfSome { false }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Flowable excludes when None and predicate True`() {
+        Flowable.just(optionOf(null))
+                .filterIfSome { true }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Flowable excludes when None and predicate False`() {
+        Flowable.just(optionOf("abc"))
+                .filterIfSome { false }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
     fun `filterIfSome on Single includes when Some`() {
         val value = "abc"
         Single.just(optionOf(value))
@@ -68,6 +132,39 @@ class RxJava2ExtensionsTest {
     }
 
     @Test
+    fun `filterIfSome with predicate on Single includes when Some and predicate True`() {
+        val value = "abc"
+        Single.just(optionOf(value))
+                .filterIfSome { true }
+                .test()
+                .assertValue(value)
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Single excludes when Some and predicate False`() {
+        Single.just(optionOf("abc"))
+                .filterIfSome { false }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Single excludes when None and predicate True`() {
+        Single.just(optionOf(null))
+                .filterIfSome { true }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Single excludes when None and predicate False`() {
+        Single.just(optionOf("abc"))
+                .filterIfSome { false }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
     fun `filterIfSome on Maybe includes when Some`() {
         val value = "abc"
         Maybe.just(optionOf(value))
@@ -80,6 +177,39 @@ class RxJava2ExtensionsTest {
     fun `filterIfSome on Maybe excludes when None`() {
         Maybe.just(optionOf(null))
                 .filterIfSome()
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Maybe includes when Some and predicate True`() {
+        val value = "abc"
+        Maybe.just(optionOf(value))
+                .filterIfSome { true }
+                .test()
+                .assertValue(value)
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Maybe excludes when Some and predicate False`() {
+        Maybe.just(optionOf("abc"))
+                .filterIfSome { false }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Maybe excludes when None and predicate True`() {
+        Maybe.just(optionOf(null))
+                .filterIfSome { true }
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfSome with predicate on Maybe excludes when None and predicate False`() {
+        Maybe.just(optionOf("abc"))
+                .filterIfSome { false }
                 .test()
                 .assertNoValues()
     }
