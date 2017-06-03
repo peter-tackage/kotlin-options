@@ -15,6 +15,6 @@ dependencies {
 
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testCompile 'junit:junit:4.11'
+    // Need to have twice: https://discuss.gradle.org/t/compileonly-dependencies-are-not-available-in-tests/15366/5
     testCompile 'io.reactivex.rxjava2:rxjava:2.1.0'
-
 }
