@@ -32,7 +32,7 @@ Transform the value by chaining functional operators as required:
 
 ## RxJava 2 Extensions
 
-Extension methods are provided to transform RxJava 2 streams, including `Observable`, `Flowable` and `Single`.
+Extension methods are provided to transform RxJava 2 streams, including `Observable`, `Flowable`, `Single` and `Maybe`.
 
 You can use this to filter an `Option` to its value:
 
@@ -70,7 +70,7 @@ You can also use a predicate:
     
 ## Download
 
-Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.4).
+Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.5).
 
 ## Feedback Welcomed!
 

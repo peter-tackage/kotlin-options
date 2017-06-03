@@ -1,6 +1,7 @@
 package com.petertackage.kotlinoptions
 
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Test
@@ -8,7 +9,7 @@ import org.junit.Test
 class RxJava2ExtensionsTest {
 
     /*
-     * filterIsSome
+     * filterIfSome
      */
 
     @Test
@@ -66,6 +67,23 @@ class RxJava2ExtensionsTest {
                 .assertNoValues()
     }
 
+    @Test
+    fun `filterIfSome on Maybe includes when Some`() {
+        val value = "abc"
+        Maybe.just(optionOf(value))
+                .filterIfSome()
+                .test()
+                .assertValue(value)
+    }
+
+    @Test
+    fun `filterIfSome on Maybe excludes when None`() {
+        Maybe.just(optionOf(null))
+                .filterIfSome()
+                .test()
+                .assertNoValues()
+    }
+
     /*
      * filterIfNone
      */
@@ -113,6 +131,22 @@ class RxJava2ExtensionsTest {
     @Test
     fun `filterIfNone on Single excludes when Some`() {
         Single.just(optionOf("abc"))
+                .filterIfNone()
+                .test()
+                .assertNoValues()
+    }
+
+    @Test
+    fun `filterIfNone on Maybe includes when None`() {
+        Maybe.just(optionOf(null))
+                .filterIfNone()
+                .test()
+                .assertValue(Unit)
+    }
+
+    @Test
+    fun `filterIfNone on Maybe excludes when Some`() {
+        Maybe.just(optionOf("abc"))
                 .filterIfNone()
                 .test()
                 .assertNoValues()

@@ -17,6 +17,10 @@ fun <T : Any> Single<Option<T>>.filterIfSome(): Maybe<T> {
     return this.filter { it.isSome() }.map { it.getUnsafe() }
 }
 
+fun <T : Any> Maybe<Option<T>>.filterIfSome(): Maybe<T> {
+    return this.filter { it.isSome() }.map { it.getUnsafe() }
+}
+
 fun <T : Any> Observable<Option<T>>.filterIfNone(): Observable<Unit> {
     return this.filter { it.isNone() }.map { Unit }
 }
@@ -28,3 +32,8 @@ fun <T : Any> Flowable<Option<T>>.filterIfNone(): Flowable<Unit> {
 fun <T : Any> Single<Option<T>>.filterIfNone(): Maybe<Unit> {
     return this.filter { it.isNone() }.map { Unit }
 }
+
+fun <T : Any> Maybe<Option<T>>.filterIfNone(): Maybe<Unit> {
+    return this.filter { it.isNone() }.map { Unit }
+}
+
