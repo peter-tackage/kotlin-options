@@ -44,9 +44,9 @@ class OptionAssertions<T : Any> internal constructor(private val actual: Option<
         return apply { assert(expected == actualValue, { "Expected value: <$expected> but was: <$actualValue>" }) }
     }
 
-    fun hasValue(predicate: (T) -> Boolean): OptionAssertions<T> {
+    fun hasValue(expectedPredicate: (T) -> Boolean): OptionAssertions<T> {
         isSome()
         val actualValue = actual.getUnsafe()
-        return apply { assert(predicate(actualValue), { "Expected predicate did not match: <$actualValue>" }) }
+        return apply { assert(expectedPredicate(actualValue), { "Expected predicate did not match: <$actualValue>" }) }
     }
 }
