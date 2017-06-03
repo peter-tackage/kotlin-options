@@ -1,33 +1,17 @@
-group 'com.petertackage.kotlinoptions'
-version '0.3'
-
 buildscript {
+
     ext.kotlin_version = '1.1.2-3'
+
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'kotlin'
-
-repositories {
-    mavenCentral()
-}
-
-// Not strictly necessary, because we have no Java source and by default the Kotlin compiler produces 1.6 bytecode
-tasks.withType(JavaCompile) {
-    sourceCompatibility = JavaVersion.VERSION_1_6; targetCompatibility = JavaVersion.VERSION_1_6
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.assertj:assertj-core:3.6.2'
-    testCompile 'org.mockito:mockito-core:2.7.22'
-    testCompile 'com.nhaarman:mockito-kotlin:1.4.0'
+allprojects {
+    repositories {
+        jcenter()
+    }
 }
