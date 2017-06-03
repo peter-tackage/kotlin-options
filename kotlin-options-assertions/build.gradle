@@ -8,8 +8,9 @@ repositories {
 apply plugin: 'kotlin'
 
 dependencies {
+    compile project(':kotlin-options')
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "com.github.peter-tackage:kotlin-options:$version"
 
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testCompile 'junit:junit:4.11'
