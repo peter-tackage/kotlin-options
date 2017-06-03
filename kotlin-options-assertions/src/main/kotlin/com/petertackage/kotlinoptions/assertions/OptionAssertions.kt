@@ -21,7 +21,7 @@ class OptionAssertions<T : Any> internal constructor(private val actual: Option<
     fun hasValue(expected: T): OptionAssertions<T> {
         isSome()
         val actualValue = actual.getUnsafe()
-        assert(actualValue == (expected), { " " })
+        assert(actualValue == expected, { "Expected value: <$expected> but was: <$actualValue>" })
         return this
     }
 

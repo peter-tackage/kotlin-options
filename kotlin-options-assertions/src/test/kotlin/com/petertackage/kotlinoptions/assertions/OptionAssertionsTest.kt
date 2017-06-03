@@ -16,10 +16,10 @@ class OptionAssertionsTest {
 
     @Test
     fun `isSome fails when isNone`() {
-        assertFailsWith(AssertionError::class,
-                message = "Expected: <Some> but was: <None>") {
+        val actualException = assertFailsWith(AssertionError::class) {
             assertThat(Option.None).isSome()
         }
+        assert(actualException.message == "Expected: <Some> but was: <None>")
     }
 
     @Test
@@ -31,10 +31,10 @@ class OptionAssertionsTest {
     fun `isNone fails when isSome`() {
         val some = optionOf("abc")
 
-        assertFailsWith(AssertionError::class,
-                message = "Expected: <None> but was: <Some>") {
+        val actualException = assertFailsWith(AssertionError::class) {
             assertThat(some).isNone()
         }
+        assert(actualException.message == "Expected: <None> but was: <Some>")
     }
 
     @Test
@@ -48,20 +48,20 @@ class OptionAssertionsTest {
     fun `hasValue fails when value not equals`() {
         val some = optionOf("abc")
 
-        assertFailsWith(AssertionError::class,
-                message = "Expected value: <abc> but was: <xyz>") {
+        val actualException = assertFailsWith(AssertionError::class) {
             assertThat(some).hasValue("xyz")
         }
+        assert(actualException.message == "Expected value: <xyz> but was: <abc>")
     }
 
     @Test
     fun `hasValue fails when isNone`() {
         val none = optionOf(null as String?)
 
-        assertFailsWith(AssertionError::class,
-                message = "Expected: <Some> but was: <None>") {
+        val actualException = assertFailsWith(AssertionError::class) {
             assertThat(none).hasValue("does not matter")
         }
+        assert(actualException.message == "Expected: <Some> but was: <None>")
     }
 
     @Test
@@ -77,20 +77,20 @@ class OptionAssertionsTest {
         val some = optionOf("abc")
         val predicate: (String) -> Boolean = { false }
 
-        assertFailsWith(AssertionError::class,
-                message = "Expected predicate did not match: <abc>)") {
+        val actualException = assertFailsWith(AssertionError::class) {
             assertThat(some).hasValue(predicate)
         }
+        assert(actualException.message == "Expected predicate did not match: <abc>")
     }
 
     @Test
     fun `hasValue with predicate fails when isNone`() {
         val none = optionOf(null as String?)
-        val predicate: (String) -> Boolean = { it.isEmpty() }
+        val predicate: (String) -> Boolean = { true }
 
-        assertFailsWith(AssertionError::class,
-                message = "Expected: <Some> but was: <None>") {
+        val actualException = assertFailsWith(AssertionError::class) {
             assertThat(none).hasValue(predicate)
         }
+        assert(actualException.message == "Expected: <Some> but was: <None>")
     }
 }
