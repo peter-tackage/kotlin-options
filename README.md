@@ -30,9 +30,47 @@ Transform the value by chaining functional operators as required:
             .matchAction( { log(it) }, { log("No user to login!") })
 ```
 
+## RxJava 2 Extensions
+
+Extension methods are provided to transform RxJava 2 streams, including `Observable`, `Flowable` and `Single`.
+
+You can use this to filter an `Option` to its value:
+
+```Kotlin
+    Observable.just(optionOf("abc"))
+        .filterIfSome()
+        .subscribe( { println(it.length)} ) // use String value
+```
+
+## Testing
+
+You can test your Options using: 
+
+```Kotlin
+    val someOption = optionOf("abc")
+    
+    assertThat(someOption).hasValue("abc")
+```
+
+or directly:
+
+```Kotlin
+    val someOption = optionOf("abc")
+    
+    someOption.assertHasValue("abc")
+```
+    
+You can also use a predicate:
+
+```Kotlin
+    val someOption = optionOf("abc")
+    
+    someOption.assertHasValue{ it.length > 2 }
+```
+    
 ## Download
 
-Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.1).
+Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.4).
 
 ## Feedback Welcomed!
 
