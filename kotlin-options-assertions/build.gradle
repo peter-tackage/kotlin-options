@@ -1,5 +1,5 @@
 group 'com.petertackage.kotlinoptions.assertions'
-version '0.3'
+version "$library_version"
 
 repositories {
     maven { url 'https://jitpack.io' }
