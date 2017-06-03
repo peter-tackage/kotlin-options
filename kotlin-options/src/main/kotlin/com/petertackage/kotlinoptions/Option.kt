@@ -1,14 +1,12 @@
 package com.petertackage.kotlinoptions
 
+fun <T : Any> optionOf(value: T?): Option<T> {
+    return if (value == null) Option.None else Option.Some(value)
+}
+
 sealed class Option<out T : Any> {
 
-    companion object {
-        fun <T : Any> optionOf(value: T?): Option<T> {
-            return if (value == null) Option.None else Option.Some(value)
-        }
-    }
-
-    private data class Some<out T : Any>(val value: T) : Option<T>()
+    internal data class Some<out T : Any>(val value: T) : Option<T>()
     object None : Option<Nothing>() {
         override fun toString(): String {
             return "None"

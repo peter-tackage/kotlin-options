@@ -1,7 +1,7 @@
 package com.petertackage.kotlinoptions.assertions
 
 import com.petertackage.kotlinoptions.Option
-import com.petertackage.kotlinoptions.Option.Companion.optionOf
+import com.petertackage.kotlinoptions.optionOf
 import org.junit.Test
 import kotlin.test.assertFailsWith
 
