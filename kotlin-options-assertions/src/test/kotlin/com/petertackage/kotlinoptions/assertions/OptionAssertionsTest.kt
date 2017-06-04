@@ -8,14 +8,14 @@ import kotlin.test.assertFailsWith
 class OptionAssertionsTest {
 
     @Test
-    fun `isSome passes when isSome`() {
+    fun `isSome passes when Some`() {
         val some = optionOf("abc")
 
         assertThat(some).isSome()
     }
 
     @Test
-    fun `isSome fails when isNone`() {
+    fun `isSome fails when None`() {
         val actualException = assertFailsWith(AssertionError::class) {
             assertThat(None).isSome()
         }
@@ -23,12 +23,12 @@ class OptionAssertionsTest {
     }
 
     @Test
-    fun `isNone passes when isNone`() {
+    fun `isNone passes when None`() {
         assertThat(None).isNone()
     }
 
     @Test
-    fun `isNone fails when isSome`() {
+    fun `isNone fails when Some`() {
         val some = optionOf("abc")
 
         val actualException = assertFailsWith(AssertionError::class) {
@@ -55,7 +55,7 @@ class OptionAssertionsTest {
     }
 
     @Test
-    fun `hasValue fails when isNone`() {
+    fun `hasValue fails when None`() {
         val none = optionOf(null as String?)
 
         val actualException = assertFailsWith(AssertionError::class) {
@@ -84,7 +84,7 @@ class OptionAssertionsTest {
     }
 
     @Test
-    fun `hasValue with predicate fails when isNone`() {
+    fun `hasValue with predicate fails when None`() {
         val none = optionOf(null as String?)
         val predicate: (String) -> Boolean = { true }
 
@@ -99,14 +99,14 @@ class OptionAssertionsTest {
      */
 
     @Test
-    fun `assertIsSome passes when isSome`() {
+    fun `assertIsSome passes when Some`() {
         val some = optionOf("abc")
 
         some.assertIsSome()
     }
 
     @Test
-    fun `assertIsSome fails when isNone`() {
+    fun `assertIsSome fails when None`() {
         val actualException = assertFailsWith(AssertionError::class) {
             None.assertIsSome()
         }
@@ -114,12 +114,12 @@ class OptionAssertionsTest {
     }
 
     @Test
-    fun `assertIsNone passes when isNone`() {
+    fun `assertIsNone passes when None`() {
         None.assertIsNone()
     }
 
     @Test
-    fun `assertIsNone fails when isSome`() {
+    fun `assertIsNone fails when Some`() {
         val some = optionOf("abc")
 
         val actualException = assertFailsWith(AssertionError::class) {
@@ -146,7 +146,7 @@ class OptionAssertionsTest {
     }
 
     @Test
-    fun `assertHasValue fails when isNone`() {
+    fun `assertHasValue fails when None`() {
         val none = optionOf(null as String?)
 
         val actualException = assertFailsWith(AssertionError::class) {
@@ -175,7 +175,7 @@ class OptionAssertionsTest {
     }
 
     @Test
-    fun `assertHasValue with predicate fails when isNone`() {
+    fun `assertHasValue with predicate fails when None`() {
         val none = optionOf(null as String?)
         val predicate: (String) -> Boolean = { true }
 
