@@ -1,6 +1,6 @@
 package com.petertackage.kotlinoptions.assertions
 
-import com.petertackage.kotlinoptions.Option
+import com.petertackage.kotlinoptions.None
 import com.petertackage.kotlinoptions.optionOf
 import org.junit.Test
 import kotlin.test.assertFailsWith
@@ -17,14 +17,14 @@ class OptionAssertionsTest {
     @Test
     fun `isSome fails when isNone`() {
         val actualException = assertFailsWith(AssertionError::class) {
-            assertThat(Option.None).isSome()
+            assertThat(None).isSome()
         }
         assert(actualException.message == "Expected: <Some> but was: <None>")
     }
 
     @Test
     fun `isNone passes when isNone`() {
-        assertThat(Option.None).isNone()
+        assertThat(None).isNone()
     }
 
     @Test
@@ -108,14 +108,14 @@ class OptionAssertionsTest {
     @Test
     fun `assertIsSome fails when isNone`() {
         val actualException = assertFailsWith(AssertionError::class) {
-            Option.None.assertIsSome()
+            None.assertIsSome()
         }
         assert(actualException.message == "Expected: <Some> but was: <None>")
     }
 
     @Test
     fun `assertIsNone passes when isNone`() {
-        Option.None.assertIsNone()
+        None.assertIsNone()
     }
 
     @Test

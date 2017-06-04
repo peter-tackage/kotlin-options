@@ -17,7 +17,7 @@ class OptionTest {
 
     @Test
     fun `none is single instance`() {
-        assertThat(Option.None).isSameAs(Option.None)
+        assertThat(None).isSameAs(None)
     }
 
     @Test
@@ -112,7 +112,7 @@ class OptionTest {
 
         val result = optionOf(null).flatMap(function)
 
-        assertThat(result is Option.None).isTrue()
+        assertThat(result is None).isTrue()
     }
 
     @Test
@@ -121,7 +121,7 @@ class OptionTest {
 
         val result = optionOf("value").filter(filterPred)
 
-        assertThat(result is Option.Some).isTrue()
+        assertThat(result is Some).isTrue()
     }
 
     @Test
@@ -141,7 +141,7 @@ class OptionTest {
 
         val result = optionOf("value").filter(filterPred)
 
-        assertThat(result is Option.None).isTrue()
+        assertThat(result is None).isTrue()
     }
 
     @Test

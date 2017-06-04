@@ -1,76 +1,76 @@
 package com.petertackage.kotlinoptions
 
 fun <T : Any> optionOf(value: T?): Option<T> =
-        if (value == null) Option.None else Option.Some(value)
+        if (value == null) None else Some(value)
+
+data class Some<out T : Any> internal constructor(val value: T) : Option<T>()
+object None : Option<Nothing>() {
+    override fun toString(): String {
+        return "None"
+    }
+}
 
 sealed class Option<out T : Any> {
 
-    data class Some<out T : Any>(val value: T) : Option<T>()
-    object None : Option<Nothing>() {
-        override fun toString(): String {
-            return "None"
-        }
-    }
-
     fun ifSome(action: (T) -> Unit) {
         when (this) {
-            is Option.Some -> action(value)
+            is Some -> action(value)
         }
     }
 
     fun ifNone(action: () -> Unit) {
         when (this) {
-            is Option.None -> action()
+            is None -> action()
         }
     }
 
     fun <R : Any> map(mapper: (T) -> R): Option<R> {
         return when (this) {
-            is Option.Some -> optionOf(mapper(value))
-            is Option.None -> this
+            is Some -> optionOf(mapper(value))
+            is None -> this
         }
     }
 
     fun <R : Any> flatMap(mapper: (T) -> Option<R>): Option<R> {
         return when (this) {
-            is Option.Some -> mapper(value)
-            is Option.None -> this
+            is Some -> mapper(value)
+            is None -> this
         }
     }
 
     fun filter(predicate: (T) -> Boolean): Option<T> {
         return when (this) {
-            is Option.Some -> if (predicate(value)) this else Option.None
-            is Option.None -> this
+            is Some -> if (predicate(value)) this else None
+            is None -> this
         }
     }
 
     fun matchAction(someAction: (T) -> Unit, noneAction: () -> Unit) {
         when (this) {
-            is Option.Some -> someAction(value)
-            is Option.None -> noneAction()
+            is Some -> someAction(value)
+            is None -> noneAction()
         }
     }
 
     fun <R> match(someFunction: (T) -> R, noneFunction: () -> R): R {
         return when (this) {
-            is Option.Some -> someFunction(value)
-            is Option.None -> noneFunction()
+            is Some -> someFunction(value)
+            is None -> noneFunction()
         }
     }
 
     fun <R : Any> and(other: Option<R>, action: (T, R) -> Unit) {
         when (this) {
-            is Option.Some -> when (other) {
-                is Option.Some -> action(this.value, other.value)
+            is Some -> when (other) {
+                is Some -> action(this.value, other.value)
             }
         }
     }
 
     fun <R : Any> asType(clazz: Class<R>): Option<R> {
         return when (this) {
-            is Option.Some -> if (clazz.isInstance(value)) Option.Some(clazz.cast(value)) else Option.None
-            is Option.None -> this
+            is Some -> if (clazz.isInstance(value)) Some(clazz.cast(value)) else None
+            is None -> this
         }
     }
 
@@ -78,21 +78,21 @@ sealed class Option<out T : Any> {
         try {
             return optionOf(function())
         } catch (e: Exception) {
-            return Option.None
+            return None
         }
     }
 
     fun getUnsafe(): T {
         return when (this) {
-            is Option.Some -> value
-            is Option.None -> throw IllegalStateException("Attempt to unsafely access value when Option is None")
+            is Some -> value
+            is None -> throw IllegalStateException("Attempt to unsafely access value when Option is None")
         }
     }
 
     fun toNullable(): T? {
         return when (this) {
-            is Option.Some -> value
-            is Option.None -> null
+            is Some -> value
+            is None -> null
         }
     }
 

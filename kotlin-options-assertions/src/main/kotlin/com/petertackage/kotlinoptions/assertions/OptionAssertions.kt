@@ -1,6 +1,8 @@
 package com.petertackage.kotlinoptions.assertions
 
+import com.petertackage.kotlinoptions.None
 import com.petertackage.kotlinoptions.Option
+import com.petertackage.kotlinoptions.Some
 
 fun <T : Any> assertThat(actual: Option<T>): OptionAssertions<T> {
     return OptionAssertions(actual)
@@ -26,14 +28,14 @@ class OptionAssertions<T : Any> internal constructor(private val actual: Option<
 
     fun isSome(): OptionAssertions<T> {
         return apply {
-            assert(actual is Option.Some,
+            assert(actual is Some,
                     { "Expected: <Some> but was: <None>" })
         }
     }
 
     fun isNone(): OptionAssertions<T> {
         return apply {
-            assert(actual is Option.None,
+            assert(actual is None,
                     { "Expected: <None> but was: <Some>" })
         }
     }
