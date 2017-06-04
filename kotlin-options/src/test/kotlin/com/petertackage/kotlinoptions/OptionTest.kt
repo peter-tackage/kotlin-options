@@ -16,8 +16,19 @@ class OptionTest {
     var thrown = ExpectedException.none()
 
     @Test
-    fun `none is single instance`() {
-        assertThat(None).isSameAs(None)
+    fun `optionOf returns None when value is null`() {
+        assertThat(optionOf(null)).isEqualTo(None)
+    }
+
+    @Test
+    fun `optionOf None is single instance`() {
+        assertThat(optionOf(null)).isSameAs(optionOf(null))
+    }
+
+    @Test
+    fun `optionOf Some is not single instance`() {
+        val value = "abc"
+        assertThat(optionOf(value)).isNotSameAs(optionOf(value))
     }
 
     @Test
@@ -34,7 +45,7 @@ class OptionTest {
     fun `ifSome does not perform action with value when None`() {
         val action: (String) -> Unit = mock()
 
-        optionOf(null).ifSome(action)
+        None.ifSome(action)
 
         verify(action, never()).invoke(any())
     }
@@ -43,7 +54,7 @@ class OptionTest {
     fun `ifNone performs action when None`() {
         val action: () -> Unit = mock()
 
-        optionOf(null).ifNone(action)
+        None.ifNone(action)
 
         verify(action).invoke()
     }
@@ -82,7 +93,7 @@ class OptionTest {
     fun `map does not invoke function when None`() {
         val function: (String) -> Int = mock()
 
-        optionOf(null).map(function)
+        None.map(function)
 
         verify(function, never()).invoke(any())
     }
@@ -101,7 +112,7 @@ class OptionTest {
     fun `flatmap does not invoke function value when None`() {
         val function: (String) -> Option<Int> = mock()
 
-        optionOf(null).flatMap(function)
+        None.flatMap(function)
 
         verify(function, never()).invoke(any())
     }
@@ -110,7 +121,7 @@ class OptionTest {
     fun `flatmap returns None when None`() {
         val function: (String) -> Option<Int> = mock()
 
-        val result = optionOf(null).flatMap(function)
+        val result = None.flatMap(function)
 
         assertThat(result is None).isTrue()
     }
@@ -161,7 +172,7 @@ class OptionTest {
         val someAction: (String) -> Unit = mock()
         val noneAction: () -> Unit = mock()
 
-        optionOf(null).matchAction(someAction, noneAction)
+        None.matchAction(someAction, noneAction)
 
         verify(noneAction).invoke()
         verify(someAction, never()).invoke(any())
@@ -194,7 +205,7 @@ class OptionTest {
         val someFunction: (String) -> Int = mock()
         val noneFunction: () -> Int = mock()
 
-        optionOf(null).match(someFunction, noneFunction)
+        None.match(someFunction, noneFunction)
 
         verify(noneFunction).invoke()
         verify(someFunction, never()).invoke(any())
@@ -205,7 +216,7 @@ class OptionTest {
         val someFunction: (String) -> Int = mock()
         val noneFunction: () -> Int = { 6 }
 
-        val result = optionOf(null).match(someFunction, noneFunction)
+        val result = None.match(someFunction, noneFunction)
 
         assertThat(result).isEqualTo(6)
     }
@@ -223,7 +234,7 @@ class OptionTest {
 
     @Test
     fun `and does not invoke action when first Option is None`() {
-        val option1 = optionOf(null)
+        val option1 = None
         val option2 = optionOf("2")
         val action: (String, String) -> Unit = mock()
 
@@ -235,7 +246,7 @@ class OptionTest {
     @Test
     fun `and does not invoke action when second Option is None`() {
         val option1 = optionOf("1")
-        val option2 = optionOf(null)
+        val option2 = None
         val action: (String, String) -> Unit = mock()
 
         option1.and(option2, action)
@@ -257,20 +268,20 @@ class OptionTest {
         thrown.expect(IllegalStateException::class.java)
         thrown.expectMessage("Attempt to unsafely access value when Option is None")
 
-        optionOf(null).getUnsafe()
+        None.getUnsafe()
     }
 
     @Test
     fun `equals returns true when self`() {
-        val option1 = optionOf(null)
+        val option1 = None
 
         assertThat(option1 == option1).isTrue()
     }
 
     @Test
     fun `equals returns true when both None`() {
-        val option1 = optionOf(null)
-        val option2 = optionOf(null)
+        val option1 = None
+        val option2 = None
 
         assertThat(option1 == option2).isTrue()
     }
@@ -278,14 +289,14 @@ class OptionTest {
     @Test
     fun `equals returns false when this Some other None`() {
         val option1 = optionOf("value")
-        val option2 = optionOf(null)
+        val option2 = None
 
         assertThat(option1 == option2).isFalse()
     }
 
     @Test
     fun `equals returns false when this None other Some`() {
-        val option1 = optionOf(null)
+        val option1 = None
         val option2 = optionOf("value")
 
         assertThat(option1 == option2).isFalse()
@@ -318,7 +329,7 @@ class OptionTest {
 
     @Test
     fun `equals returns true when both same None instance`() {
-        val option = optionOf(null)
+        val option = None
 
         assertThat(option == option).isTrue()
     }
@@ -342,8 +353,8 @@ class OptionTest {
 
     @Test
     fun `hashCode is constant when None`() {
-        val hashCode1 = optionOf(null).hashCode()
-        val hashCode2 = optionOf(null).hashCode()
+        val hashCode1 = None.hashCode()
+        val hashCode2 = None.hashCode()
 
         assertThat(hashCode1).isEqualTo(hashCode2)
     }
@@ -359,7 +370,7 @@ class OptionTest {
 
     @Test
     fun `toString is None when None`() {
-        val toString = optionOf(null).toString()
+        val toString = None.toString()
 
         assertThat(toString).isEqualTo("None")
     }
@@ -378,8 +389,7 @@ class OptionTest {
     fun `toNullable when null value`() {
         val expected: String? = null
 
-        val nullable: String? = optionOf(null)
-                .toNullable()
+        val nullable: String? = None.toNullable()
 
         assertThat(nullable).isEqualTo(expected)
     }

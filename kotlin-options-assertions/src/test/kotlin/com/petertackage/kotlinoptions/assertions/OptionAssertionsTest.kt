@@ -1,6 +1,7 @@
 package com.petertackage.kotlinoptions.assertions
 
 import com.petertackage.kotlinoptions.None
+import com.petertackage.kotlinoptions.Option
 import com.petertackage.kotlinoptions.optionOf
 import org.junit.Test
 import kotlin.test.assertFailsWith
@@ -56,7 +57,7 @@ class OptionAssertionsTest {
 
     @Test
     fun `hasValue fails when None`() {
-        val none = optionOf(null as String?)
+        val none: Option<*> = None
 
         val actualException = assertFailsWith(AssertionError::class) {
             assertThat(none).hasValue("does not matter")
@@ -85,7 +86,7 @@ class OptionAssertionsTest {
 
     @Test
     fun `hasValue with predicate fails when None`() {
-        val none = optionOf(null as String?)
+        val none: Option<*> = None
         val predicate: (String) -> Boolean = { true }
 
         val actualException = assertFailsWith(AssertionError::class) {
@@ -147,7 +148,7 @@ class OptionAssertionsTest {
 
     @Test
     fun `assertHasValue fails when None`() {
-        val none = optionOf(null as String?)
+        val none: Option<*> = None
 
         val actualException = assertFailsWith(AssertionError::class) {
             none.assertHasValue("does not matter")
@@ -176,7 +177,7 @@ class OptionAssertionsTest {
 
     @Test
     fun `assertHasValue with predicate fails when None`() {
-        val none = optionOf(null as String?)
+        val none: Option<*> = None
         val predicate: (String) -> Boolean = { true }
 
         val actualException = assertFailsWith(AssertionError::class) {

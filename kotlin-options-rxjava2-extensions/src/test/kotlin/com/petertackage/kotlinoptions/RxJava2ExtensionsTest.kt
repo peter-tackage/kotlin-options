@@ -23,7 +23,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome on Observable excludes when None`() {
-        Observable.just(optionOf(null))
+        val none: Option<*> = None
+        Observable.just(none)
                 .filterIfSome()
                 .test()
                 .assertNoValues()
@@ -48,7 +49,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome with predicate on Observable excludes when None and predicate True`() {
-        Observable.just(optionOf(null))
+        val none: Option<*> = None
+        Observable.just(none)
                 .filterIfSome { true }
                 .test()
                 .assertNoValues()
@@ -73,9 +75,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome on Flowable excludes when None`() {
-        val option = optionOf(null)
-
-        Flowable.just(option)
+        val none: Option<*> = None
+        Flowable.just(none)
                 .filterIfSome()
                 .test()
                 .assertNoValues()
@@ -100,7 +101,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome with predicate on Flowable excludes when None and predicate True`() {
-        Flowable.just(optionOf(null))
+        val none: Option<*> = None
+        Flowable.just(none)
                 .filterIfSome { true }
                 .test()
                 .assertNoValues()
@@ -125,7 +127,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome on Single excludes when None`() {
-        Single.just(optionOf(null))
+        val none: Option<*> = None
+        Single.just(none)
                 .filterIfSome()
                 .test()
                 .assertNoValues()
@@ -150,7 +153,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome with predicate on Single excludes when None and predicate True`() {
-        Single.just(optionOf(null))
+        val none: Option<*> = None
+        Single.just(none)
                 .filterIfSome { true }
                 .test()
                 .assertNoValues()
@@ -175,7 +179,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome on Maybe excludes when None`() {
-        Maybe.just(optionOf(null))
+        val none: Option<*> = None
+        Maybe.just(none)
                 .filterIfSome()
                 .test()
                 .assertNoValues()
@@ -200,7 +205,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfSome with predicate on Maybe excludes when None and predicate True`() {
-        Maybe.just(optionOf(null))
+        val none: Option<*> = None
+        Maybe.just(none)
                 .filterIfSome { true }
                 .test()
                 .assertNoValues()
@@ -220,7 +226,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfNone on Observable includes when None`() {
-        Observable.just(optionOf(null))
+        val none: Option<*> = None
+        Observable.just(none)
                 .filterIfNone()
                 .test()
                 .assertValue(Unit)
@@ -236,7 +243,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfNone on Flowable includes when None`() {
-        Flowable.just(optionOf(null))
+        val none: Option<*> = None
+        Flowable.just(none)
                 .filterIfNone()
                 .test()
                 .assertValue(Unit)
@@ -252,7 +260,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfNone on Single includes when None`() {
-        Single.just(optionOf(null))
+        val none: Option<*> = None
+        Single.just(none)
                 .filterIfNone()
                 .test()
                 .assertValue(Unit)
@@ -268,7 +277,8 @@ class RxJava2ExtensionsTest {
 
     @Test
     fun `filterIfNone on Maybe includes when None`() {
-        Maybe.just(optionOf(null))
+        val none: Option<*> = None
+        Maybe.just(none)
                 .filterIfNone()
                 .test()
                 .assertValue(Unit)
