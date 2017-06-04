@@ -5,22 +5,11 @@ fun <T : Any> optionOf(value: T?): Option<T> =
 
 sealed class Option<out T : Any> {
 
-    internal data class Some<out T : Any>(val value: T) : Option<T>()
+    data class Some<out T : Any>(val value: T) : Option<T>()
     object None : Option<Nothing>() {
         override fun toString(): String {
             return "None"
         }
-    }
-
-    fun isSome(): Boolean {
-        return when (this) {
-            is Option.Some -> true
-            is Option.None -> false
-        }
-    }
-
-    fun isNone(): Boolean {
-        return !isSome()
     }
 
     fun ifSome(action: (T) -> Unit) {

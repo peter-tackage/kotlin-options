@@ -26,14 +26,14 @@ class OptionAssertions<T : Any> internal constructor(private val actual: Option<
 
     fun isSome(): OptionAssertions<T> {
         return apply {
-            assert(actual.isSome(),
+            assert(actual is Option.Some,
                     { "Expected: <Some> but was: <None>" })
         }
     }
 
     fun isNone(): OptionAssertions<T> {
         return apply {
-            assert(actual.isNone(),
+            assert(actual is Option.None,
                     { "Expected: <None> but was: <Some>" })
         }
     }

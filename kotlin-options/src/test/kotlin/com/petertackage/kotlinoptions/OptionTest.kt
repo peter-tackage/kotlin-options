@@ -21,26 +21,6 @@ class OptionTest {
     }
 
     @Test
-    fun `isSome returns true when non-null value`() {
-        assertThat(optionOf("value").isSome()).isTrue()
-    }
-
-    @Test
-    fun `isSome returns false when null value`() {
-        assertThat(optionOf(null).isSome()).isFalse()
-    }
-
-    @Test
-    fun `isNone returns true when null value`() {
-        assertThat(optionOf(null).isNone()).isTrue()
-    }
-
-    @Test
-    fun `isNone returns false when non-null value`() {
-        assertThat(optionOf("value").isNone()).isFalse()
-    }
-
-    @Test
     fun `ifSome performs action with value when Some`() {
         val value = "value"
         val action: (String) -> Unit = mock()
@@ -132,7 +112,7 @@ class OptionTest {
 
         val result = optionOf(null).flatMap(function)
 
-        assertThat(result.isNone()).isTrue()
+        assertThat(result is Option.None).isTrue()
     }
 
     @Test
@@ -141,7 +121,7 @@ class OptionTest {
 
         val result = optionOf("value").filter(filterPred)
 
-        assertThat(result.isSome()).isTrue()
+        assertThat(result is Option.Some).isTrue()
     }
 
     @Test
@@ -161,7 +141,7 @@ class OptionTest {
 
         val result = optionOf("value").filter(filterPred)
 
-        assertThat(result.isNone()).isTrue()
+        assertThat(result is Option.None).isTrue()
     }
 
     @Test

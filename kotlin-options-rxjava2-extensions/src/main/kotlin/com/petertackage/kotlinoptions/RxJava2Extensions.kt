@@ -10,7 +10,7 @@ import io.reactivex.Single
  */
 
 fun <T : Any> Observable<Option<T>>.filterIfSome(): Observable<T> {
-    return filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it is Option.Some }.map { it.getUnsafe() }
 }
 
 fun <T : Any> Observable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Observable<T> {
@@ -18,7 +18,7 @@ fun <T : Any> Observable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Obs
 }
 
 fun <T : Any> Flowable<Option<T>>.filterIfSome(): Flowable<T> {
-    return filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it is Option.Some }.map { it.getUnsafe() }
 }
 
 fun <T : Any> Flowable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Flowable<T> {
@@ -26,7 +26,7 @@ fun <T : Any> Flowable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Flowa
 }
 
 fun <T : Any> Single<Option<T>>.filterIfSome(): Maybe<T> {
-    return filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it is Option.Some }.map { it.getUnsafe() }
 }
 
 fun <T : Any> Single<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> {
@@ -34,7 +34,7 @@ fun <T : Any> Single<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T
 }
 
 fun <T : Any> Maybe<Option<T>>.filterIfSome(): Maybe<T> {
-    return filter { it.isSome() }.map { it.getUnsafe() }
+    return filter { it is Option.Some }.map { it.getUnsafe() }
 }
 
 fun <T : Any> Maybe<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> {
@@ -46,18 +46,18 @@ fun <T : Any> Maybe<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T>
  */
 
 fun <T : Any> Observable<Option<T>>.filterIfNone(): Observable<Unit> {
-    return filter { it.isNone() }.map { Unit }
+    return filter { it is Option.None }.map { Unit }
 }
 
 fun <T : Any> Flowable<Option<T>>.filterIfNone(): Flowable<Unit> {
-    return filter { it.isNone() }.map { Unit }
+    return filter { it is Option.None }.map { Unit }
 }
 
 fun <T : Any> Single<Option<T>>.filterIfNone(): Maybe<Unit> {
-    return filter { it.isNone() }.map { Unit }
+    return filter { it is Option.None }.map { Unit }
 }
 
 fun <T : Any> Maybe<Option<T>>.filterIfNone(): Maybe<Unit> {
-    return filter { it.isNone() }.map { Unit }
+    return filter { it is Option.None }.map { Unit }
 }
 

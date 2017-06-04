@@ -47,24 +47,21 @@ You can use this to filter an `Option` to its value:
 You can test your Options using: 
 
 ```Kotlin
-    val someOption = optionOf("abc")
-    
+    val someOption = optionOf("abc") 
     assertThat(someOption).hasValue("abc")
 ```
 
 or directly:
 
 ```Kotlin
-    val someOption = optionOf("abc")
-    
+    val someOption = optionOf("abc")  
     someOption.assertHasValue("abc")
 ```
     
 You can also use a predicate:
 
 ```Kotlin
-    val someOption = optionOf("abc")
-    
+    val someOption = optionOf("abc")   
     someOption.assertHasValue { it.length > 2 }
 ```
     
