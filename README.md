@@ -39,7 +39,7 @@ You can use this to filter an `Option` to its value:
 ```Kotlin
     Observable.just(optionOf("abc"))
         .filterIfSome()
-        .subscribe( { println(it.length)} ) // use String value
+        .subscribe { println(it.length) } // use String value
 ```
 
 ## Testing
@@ -65,7 +65,7 @@ You can also use a predicate:
 ```Kotlin
     val someOption = optionOf("abc")
     
-    someOption.assertHasValue{ it.length > 2 }
+    someOption.assertHasValue { it.length > 2 }
 ```
     
 ## Download
