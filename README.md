@@ -77,7 +77,7 @@ You can also use a predicate:
     
 ## Download
 
-Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.6).
+Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.7).
 
 ## Feedback Welcomed!
 
