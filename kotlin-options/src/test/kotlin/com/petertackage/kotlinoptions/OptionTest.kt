@@ -21,6 +21,15 @@ class OptionTest {
     }
 
     @Test
+    fun `ifSome returns self`() {
+        val option = optionOf("value")
+
+        val result = option.ifSome { }
+
+        assertThat(result).isEqualTo(option)
+    }
+
+    @Test
     fun `ifSome performs action with value when Some`() {
         val value = "value"
         val action: (String) -> Unit = mock()
@@ -37,6 +46,15 @@ class OptionTest {
         optionOf(null).ifSome(action)
 
         verify(action, never()).invoke(any())
+    }
+
+    @Test
+    fun `ifNone returns self`() {
+        val option =  optionOf(null)
+
+        val result = option.ifNone { }
+
+        assertThat(result).isEqualTo(None)
     }
 
     @Test
