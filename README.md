@@ -30,9 +30,19 @@ Transform the value by chaining functional operators as required:
             .matchAction( { log(it) }, { log("No user to login!") })
 ```
 
+## Iterable Extensions
+
+Extension methods are provided to transform to transform `Iterable`s.
+
+```Kotlin
+    val optionListWithNone : List<Option<String>> = listOf(optionOf("abc"), None)
+    
+    val listWithout : List<String> = listWithNone.filterIfSome()
+```
+
 ## RxJava 2 Extensions
 
-Extension methods are provided to transform RxJava 2 streams, including `Observable`, `Flowable`, `Single` and `Maybe`.
+Extension methods are also provided to transform RxJava 2 streams, including `Observable`, `Flowable`, `Single` and `Maybe`.
 
 You can use this to filter an `Option` to its value:
 
