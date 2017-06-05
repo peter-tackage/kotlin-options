@@ -13,17 +13,17 @@ object None : Option<Nothing>() {
 sealed class Option<out T : Any> {
 
     inline fun ifSome(action: (T) -> Unit): Option<T> {
-        if (this is Some) {
-            action(value)
+        return when (this) {
+            is Some -> apply { action(value) }
+            is None -> this
         }
-        return this
     }
 
     inline fun ifNone(action: () -> Unit): Option<T> {
-        if (this is None) {
-            action()
+        return when (this) {
+            is Some -> this
+            is None -> apply { action() }
         }
-        return this
     }
 
     fun <R : Any> map(mapper: (T) -> R): Option<R> {

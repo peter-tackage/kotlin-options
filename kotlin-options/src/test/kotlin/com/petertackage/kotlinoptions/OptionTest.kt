@@ -50,9 +50,7 @@ class OptionTest {
 
     @Test
     fun `ifNone returns self`() {
-        val option =  optionOf(null)
-
-        val result = option.ifNone { }
+        val result = None.ifNone { }
 
         assertThat(result).isEqualTo(None)
     }
