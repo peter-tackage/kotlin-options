@@ -1,7 +1,7 @@
 package com.petertackage.kotlinoptions
 
 fun <T : Any> optionOf(value: T?): Option<T> =
-        if (value == null) None else Some(value)
+    if (value == null) None else Some(value)
 
 data class Some<out T : Any> internal constructor(val value: T) : Option<T>()
 object None : Option<Nothing>() {
@@ -12,15 +12,17 @@ object None : Option<Nothing>() {
 
 sealed class Option<out T : Any> {
 
-    fun ifSome(action: (T) -> Unit) {
-        when (this) {
-            is Some -> action(value)
+    inline fun ifSome(action: (T) -> Unit): Option<T> {
+        return when (this) {
+            is Some -> apply { action(value) }
+            is None -> this
         }
     }
 
-    fun ifNone(action: () -> Unit) {
-        when (this) {
-            is None -> action()
+    inline fun ifNone(action: () -> Unit): Option<T> {
+        return when (this) {
+            is Some -> this
+            is None -> apply { action() }
         }
     }
 
@@ -60,10 +62,8 @@ sealed class Option<out T : Any> {
     }
 
     fun <R : Any> and(other: Option<R>, action: (T, R) -> Unit) {
-        when (this) {
-            is Some -> when (other) {
-                is Some -> action(this.value, other.value)
-            }
+        if (this is Some && other is Some) {
+            action(this.value, other.value)
         }
     }
 
@@ -74,7 +74,7 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun <R : Any> tryAsOption(function: () -> R): Option<R> {
+    inline fun <R : Any> tryAsOption(function: () -> R): Option<R> {
         try {
             return optionOf(function())
         } catch (e: Exception) {
