@@ -3,6 +3,14 @@ package com.petertackage.kotlinoptions
 fun <T : Any> optionOf(value: T?): Option<T> =
     if (value == null) None else Some(value)
 
+inline fun <T : Any> tryAsOption(function: () -> T?): Option<T> {
+    try {
+        return optionOf(function())
+    } catch (e: Exception) {
+        return None
+    }
+}
+
 data class Some<out T : Any> internal constructor(val value: T) : Option<T>()
 object None : Option<Nothing>() {
     override fun toString(): String {
@@ -71,14 +79,6 @@ sealed class Option<out T : Any> {
         return when (this) {
             is Some -> if (clazz.isInstance(value)) Some(clazz.cast(value)) else None
             is None -> this
-        }
-    }
-
-    inline fun <R : Any> tryAsOption(function: () -> R): Option<R> {
-        try {
-            return optionOf(function())
-        } catch (e: Exception) {
-            return None
         }
     }
 
