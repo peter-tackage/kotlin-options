@@ -411,7 +411,7 @@ class OptionTest {
     }
 
     @Test
-    fun `tryAsOption returns some if non null value returned`() {
+    fun `tryAsOption returns Some if non-null value returned`() {
         val expected = "result"
 
         val result = tryAsOption { expected }
@@ -420,7 +420,7 @@ class OptionTest {
     }
 
     @Test
-    fun `tryAsOption returns none if null value returned`() {
+    fun `tryAsOption returns None if null value returned`() {
         val result = tryAsOption { null }
 
         assertThat(result is None).isTrue()

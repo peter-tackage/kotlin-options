@@ -4,10 +4,10 @@ fun <T : Any> optionOf(value: T?): Option<T> =
     if (value == null) None else Some(value)
 
 inline fun <T : Any> tryAsOption(function: () -> T?): Option<T> {
-    try {
-        return optionOf(function())
+    return try {
+        optionOf(function())
     } catch (e: Exception) {
-        return None
+        None
     }
 }
 
