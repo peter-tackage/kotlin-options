@@ -410,5 +410,26 @@ class OptionTest {
         assertThat(nullable).isEqualTo(expected)
     }
 
+    @Test
+    fun `tryAsOption returns Some if non-null value returned`() {
+        val expected = "result"
 
+        val result = tryAsOption { expected }
+
+        assertThat(result.getUnsafe()).isEqualTo(expected)
+    }
+
+    @Test
+    fun `tryAsOption returns None if null value returned`() {
+        val result = tryAsOption { null }
+
+        assertThat(result is None).isTrue()
+    }
+
+    @Test
+    fun `tryAsOption returns none if function throws`() {
+        val result = tryAsOption { throw RuntimeException("") }
+
+        assertThat(result is None).isTrue()
+    }
 }
