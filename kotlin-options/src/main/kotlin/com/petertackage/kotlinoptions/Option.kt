@@ -1,7 +1,7 @@
 package com.petertackage.kotlinoptions
 
 fun <T : Any> optionOf(value: T?): Option<T> =
-    if (value == null) None else Some(value)
+        if (value == null) None else Some(value)
 
 inline fun <T : Any> tryAsOption(function: () -> T?): Option<T> {
     return try {
@@ -41,7 +41,7 @@ sealed class Option<out T : Any> {
         }
     }
 
-    inline fun <R : Any> map(mapper: (T) -> R): Option<R> {
+    inline fun <R : Any> map(mapper: (T) -> R?): Option<R> {
         return when (this) {
             is Some -> optionOf(mapper(value))
             is None -> this
