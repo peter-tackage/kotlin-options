@@ -26,7 +26,7 @@ class OptionTest {
     }
 
     @Test
-    fun `optionOf null is single instance`() {
+    fun `optionOf None is single instance`() {
         assertThat(optionOf(null)).isSameAs(optionOf(null))
     }
 
