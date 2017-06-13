@@ -17,7 +17,12 @@ class OptionTest {
 
     @Test
     fun `optionOf returns None when value is null`() {
-        assertThat(optionOf(null)).isEqualTo(None)
+        assertThat(optionOf(null) is None).isTrue()
+    }
+
+    @Test
+    fun `optionOf returns Some when value is non-null`() {
+        assertThat(optionOf("abc") is Some).isTrue()
     }
 
     @Test
@@ -45,7 +50,7 @@ class OptionTest {
         val value = "value"
         val action: (String) -> Unit = mock()
 
-        optionOf(value).ifSome(action)
+        Some(value).ifSome(action)
 
         verify(action).invoke(value)
     }
@@ -79,7 +84,7 @@ class OptionTest {
     fun `ifNone does not perform action when Some`() {
         val action: () -> Unit = mock()
 
-        optionOf("value").ifNone(action)
+        Some("value").ifNone(action)
 
         verify(action, never()).invoke()
     }
@@ -89,7 +94,7 @@ class OptionTest {
         val value = "value"
         val function: (String) -> Int = mock()
 
-        optionOf(value).map(function)
+        Some(value).map(function)
 
         verify(function).invoke(value)
     }
@@ -99,7 +104,7 @@ class OptionTest {
         val value = "value"
         val function: (String) -> Int = { it.length }
 
-        val result = optionOf(value).map(function)
+        val result = Some(value).map(function)
 
         assertThat(result).isEqualTo(optionOf(value.length))
         assertThat(result.getUnsafe()).isEqualTo(value.length)
@@ -117,11 +122,11 @@ class OptionTest {
     @Test
     fun `flatmap returns function value when Some`() {
         val value = "value"
-        val function: (String) -> Option<Int> = { optionOf(it.length) }
+        val function: (String) -> Option<Int> = { Some(it.length) }
 
-        val result = optionOf(value).flatMap(function)
+        val result = Some(value).flatMap(function)
 
-        assertThat(result).isEqualTo(optionOf(value.length))
+        assertThat(result).isEqualTo(Some(value.length))
     }
 
     @Test
@@ -146,7 +151,7 @@ class OptionTest {
     fun `filter returns Some when matches filter`() {
         val filterPred: (String) -> Boolean = { it == "value" }
 
-        val result = optionOf("value").filter(filterPred)
+        val result = Some("value").filter(filterPred)
 
         assertThat(result is Some).isTrue()
     }
@@ -156,7 +161,7 @@ class OptionTest {
         val value = "value"
         val filterPred: (String) -> Boolean = { it == value }
 
-        val result = optionOf(value).filter(filterPred)
+        val result = Some(value).filter(filterPred)
 
         assertThat(result).isEqualTo(optionOf(value))
         assertThat(result.getUnsafe()).isEqualTo(value)
@@ -166,7 +171,7 @@ class OptionTest {
     fun `filter returns None when does not match filter`() {
         val filterPred: (String) -> Boolean = { it == "not value" }
 
-        val result = optionOf("value").filter(filterPred)
+        val result = Some("value").filter(filterPred)
 
         assertThat(result is None).isTrue()
     }
@@ -177,7 +182,7 @@ class OptionTest {
         val someAction: (String) -> Unit = mock()
         val noneAction: () -> Unit = mock()
 
-        optionOf(value).matchAction(someAction, noneAction)
+        Some(value).matchAction(someAction, noneAction)
 
         verify(someAction).invoke(value)
         verify(noneAction, never()).invoke()
@@ -200,7 +205,7 @@ class OptionTest {
         val someFunction: (String) -> Int = mock()
         val noneFunction: () -> Int = mock()
 
-        optionOf(value).match(someFunction, noneFunction)
+        Some(value).match(someFunction, noneFunction)
 
         verify(someFunction).invoke(value)
         verify(noneFunction, never()).invoke()
@@ -211,7 +216,7 @@ class OptionTest {
         val someFunction: (String) -> Int = { 6 }
         val noneFunction: () -> Int = mock()
 
-        val result = optionOf("value").match(someFunction, noneFunction)
+        val result = Some("value").match(someFunction, noneFunction)
 
         assertThat(result).isEqualTo(6)
     }
@@ -320,8 +325,8 @@ class OptionTest {
 
     @Test
     fun `equals returns true when both same value`() {
-        val option1 = optionOf("value")
-        val option2 = optionOf("value")
+        val option1 = Some("value")
+        val option2 = Some("value")
 
         assertThat(option1 == option2).isTrue()
     }
@@ -329,7 +334,7 @@ class OptionTest {
     @Test
     fun `equals returns true when both same Some instance`() {
         val value = "value"
-        val option = optionOf(value)
+        val option = Some(value)
 
         assertThat(option == option).isTrue()
     }
@@ -337,8 +342,8 @@ class OptionTest {
     @Test
     fun `equals returns true when both same value instance`() {
         val value = "value"
-        val option1 = optionOf(value)
-        val option2 = optionOf(value)
+        val option1 = Some(value)
+        val option2 = Some(value)
 
         assertThat(option1 == option2).isTrue()
     }
@@ -362,7 +367,7 @@ class OptionTest {
     fun `hashCode is value hashCode when Some`() {
         val value = "value"
 
-        val hashCode = optionOf(value).hashCode()
+        val hashCode = Some(value).hashCode()
 
         assertThat(hashCode).isEqualTo(value.hashCode())
     }
@@ -379,7 +384,7 @@ class OptionTest {
     fun `toString is value toString when Some`() {
         val value = 1
 
-        val toString = optionOf(value).toString()
+        val toString = Some(value).toString()
 
         assertThat(toString).isEqualTo("Some(value=1)")
     }
@@ -392,22 +397,19 @@ class OptionTest {
     }
 
     @Test
-    fun `toNullable when non-null value`() {
+    fun `toNullable returns value when Some`() {
         val expected: String? = "value"
 
-        val nullable: String? = optionOf("value")
-                .toNullable()
+        val nullable: String? = Some("value").toNullable()
 
         assertThat(nullable).isEqualTo(expected)
     }
 
     @Test
-    fun `toNullable when null value`() {
-        val expected: String? = null
-
+    fun `toNullable returns null when None`() {
         val nullable: String? = None.toNullable()
 
-        assertThat(nullable).isEqualTo(expected)
+        assertThat(nullable).isNull()
     }
 
     @Test
@@ -427,7 +429,7 @@ class OptionTest {
     }
 
     @Test
-    fun `tryAsOption returns none if function throws`() {
+    fun `tryAsOption returns None if function throws`() {
         val result = tryAsOption { throw RuntimeException("") }
 
         assertThat(result is None).isTrue()
