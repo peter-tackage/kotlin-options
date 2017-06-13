@@ -41,42 +41,42 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun <R : Any> map(mapper: (T) -> R): Option<R> {
+    inline fun <R : Any> map(mapper: (T) -> R): Option<R> {
         return when (this) {
             is Some -> optionOf(mapper(value))
             is None -> this
         }
     }
 
-    fun <R : Any> flatMap(mapper: (T) -> Option<R>): Option<R> {
+    inline fun <R : Any> flatMap(mapper: (T) -> Option<R>): Option<R> {
         return when (this) {
             is Some -> mapper(value)
             is None -> this
         }
     }
 
-    fun filter(predicate: (T) -> Boolean): Option<T> {
+    inline fun filter(predicate: (T) -> Boolean): Option<T> {
         return when (this) {
             is Some -> if (predicate(value)) this else None
             is None -> this
         }
     }
 
-    fun matchAction(someAction: (T) -> Unit, noneAction: () -> Unit) {
+    inline fun matchAction(someAction: (T) -> Unit, noneAction: () -> Unit) {
         when (this) {
             is Some -> someAction(value)
             is None -> noneAction()
         }
     }
 
-    fun <R> match(someFunction: (T) -> R, noneFunction: () -> R): R {
+    inline fun <R> match(someFunction: (T) -> R, noneFunction: () -> R): R {
         return when (this) {
             is Some -> someFunction(value)
             is None -> noneFunction()
         }
     }
 
-    fun <R : Any> and(other: Option<R>, action: (T, R) -> Unit) {
+    inline fun <R : Any> and(other: Option<R>, action: (T, R) -> Unit) {
         if (this is Some && other is Some) {
             action(this.value, other.value)
         }
