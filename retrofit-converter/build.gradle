@@ -1,0 +1,18 @@
+group 'com.petertackage.kotlinoptions.retrofit-converter'
+version "$library_version"
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    compile project(':kotlin-options')
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile 'junit:junit:4.11'
+}
