@@ -432,4 +432,23 @@ class OptionTest {
 
         assertThat(result is None).isTrue()
     }
+
+    @Test
+    fun `orDefault returns value when Some`() {
+        val value = "abc"
+
+        val result = Some(value).orDefault { "xyz" }
+
+        assertThat(result).isEqualTo(value)
+    }
+
+    @Test
+    fun `orDefault returns default when None`() {
+        val value = "abc"
+
+        val result = None.orDefault { value }
+
+        assertThat(result).isEqualTo(value)
+    }
+
 }
