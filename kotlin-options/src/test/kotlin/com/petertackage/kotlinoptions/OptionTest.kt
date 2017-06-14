@@ -111,6 +111,24 @@ class OptionTest {
     }
 
     @Test
+    fun `map returns None when function returns null`() {
+        val function: (String) -> Int? = { null }
+
+        val result = optionOf("abc").map(function)
+
+        assertThat(result is None).isTrue()
+    }
+
+    @Test
+    fun `map returns Some when function returns non-null`() {
+        val function: (String) -> Int? = { it.length }
+
+        val result = optionOf("abc").map(function)
+
+        assertThat(result is Some).isTrue()
+    }
+
+    @Test
     fun `map does not invoke function when None`() {
         val function: (String) -> Int = mock()
 
