@@ -11,7 +11,7 @@ inline fun <T : Any> tryAsOption(function: () -> T?): Option<T> {
     }
 }
 
-inline fun <T : Any> Option<T>.orDefault(default: () -> T): T {
+inline fun <T : Any> Option<T>.orDefault(default: () -> T?): T? {
     return when (this) {
         is Some -> value
         is None -> default()
