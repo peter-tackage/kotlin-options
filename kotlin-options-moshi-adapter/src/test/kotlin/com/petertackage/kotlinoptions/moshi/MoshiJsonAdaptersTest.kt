@@ -1,9 +1,8 @@
-package com.petertackage.kotlinoption
+package com.petertackage.kotlinoptions.moshi
 
 import com.petertackage.kotlinoptions.None
 import com.petertackage.kotlinoptions.Option
 import com.petertackage.kotlinoptions.optionOf
-import com.petertackage.kotlinoptions.samples.OptionAdapterFactory
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
