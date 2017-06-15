@@ -1,4 +1,4 @@
-group 'com.petertackage.kotlinoptions.rxjava2-extensions'
+group 'com.petertackage.kotlinoptions'
 version "$library_version"
 
 repositories {
