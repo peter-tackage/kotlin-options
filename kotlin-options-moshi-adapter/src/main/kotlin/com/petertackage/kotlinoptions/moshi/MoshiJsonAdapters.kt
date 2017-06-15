@@ -1,4 +1,4 @@
-package com.petertackage.kotlinoptions.samples
+package com.petertackage.kotlinoptions.moshi
 
 import com.petertackage.kotlinoptions.Option
 import com.petertackage.kotlinoptions.optionOf
