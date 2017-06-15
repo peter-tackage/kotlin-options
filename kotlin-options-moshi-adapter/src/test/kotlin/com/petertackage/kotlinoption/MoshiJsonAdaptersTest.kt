@@ -6,9 +6,12 @@ import com.petertackage.kotlinoptions.optionOf
 import com.petertackage.kotlinoptions.samples.OptionAdapterFactory
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class MoshiJsonAdaptersTest {
 
@@ -55,6 +58,25 @@ class MoshiJsonAdaptersTest {
         val result = jsonAdapter.fromJson(json)!!
 
         assertEquals(None, result.optionField)
+    }
+
+    @Test
+    fun `factory returns non-null instance when parameterized Option type`() {
+        val adapterFactory = OptionAdapterFactory()
+        val type = Types.newParameterizedType(Option::class.java, Any::class.java)
+
+        val factory = adapterFactory.create(type, mutableSetOf(), moshi)
+
+        assertNotNull(factory)
+    }
+
+    @Test
+    fun `factory returns null instance when someother type`() {
+        val adapterFactory = OptionAdapterFactory()
+
+        val factory = adapterFactory.create(String::class.java, mutableSetOf(), moshi)
+
+        assertNull(factory)
     }
 
 }
