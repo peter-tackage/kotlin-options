@@ -32,4 +32,3 @@ class OptionAdapterFactory : JsonAdapter.Factory {
     }
 
 }
-

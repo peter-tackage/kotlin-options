@@ -60,4 +60,3 @@ fun <T : Any> Single<Option<T>>.filterIfNone(): Maybe<Unit> {
 fun <T : Any> Maybe<Option<T>>.filterIfNone(): Maybe<Unit> {
     return filter { it is None }.map { Unit }
 }
-

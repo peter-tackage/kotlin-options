@@ -23,7 +23,7 @@ class MoshiJsonAdaptersTest {
         // Read about Kotlin handling: https://github.com/square/moshi/issues/143
         moshi = Moshi.Builder()
                 .add(OptionAdapterFactory()) // must be first!
-                .add(KotlinJsonAdapterFactory()) // won't enforce missing fields unless present
+                .add(KotlinJsonAdapterFactory()) // needed to enforce missing fields as required
                 .build()
     }
 
