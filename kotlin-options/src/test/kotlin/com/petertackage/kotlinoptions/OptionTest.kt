@@ -100,6 +100,13 @@ class OptionTest {
     }
 
     @Test
+    fun `map returns Some when function returns non-null`() {
+        val result = optionOf("abc").map { 0 }
+
+        assertThat(result is Some).isTrue()
+    }
+
+    @Test
     fun `map returns function value when Some`() {
         val value = "value"
         val function: (String) -> Int = { it.length }
@@ -108,24 +115,6 @@ class OptionTest {
 
         assertThat(result).isEqualTo(optionOf(value.length))
         assertThat(result.getUnsafe()).isEqualTo(value.length)
-    }
-
-    @Test
-    fun `map returns None when function returns null`() {
-        val function: (String) -> Int? = { null }
-
-        val result = optionOf("abc").map(function)
-
-        assertThat(result is None).isTrue()
-    }
-
-    @Test
-    fun `map returns Some when function returns non-null`() {
-        val function: (String) -> Int? = { it.length }
-
-        val result = optionOf("abc").map(function)
-
-        assertThat(result is Some).isTrue()
     }
 
     @Test

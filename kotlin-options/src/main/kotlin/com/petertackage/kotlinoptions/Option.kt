@@ -41,7 +41,7 @@ sealed class Option<out T : Any> {
         }
     }
 
-    inline fun <R : Any> map(mapper: (T) -> R?): Option<R> {
+    inline fun <R : Any> map(mapper: (T) -> R): Option<R> {
         return when (this) {
             is Some -> optionOf(mapper(value))
             is None -> this
