@@ -82,9 +82,9 @@ sealed class Option<out T : Any> {
         }
     }
 
-    fun <R : Any> asType(clazz: Class<R>): Option<R> {
+    inline fun <reified R : Any> asType(): Option<R> {
         return when (this) {
-            is Some -> if (clazz.isInstance(value)) Some(clazz.cast(value)) else None
+            is Some -> if (value is R) optionOf(value as R) else None
             is None -> this
         }
     }
