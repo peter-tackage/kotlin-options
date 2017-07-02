@@ -46,6 +46,29 @@ class OptionTest {
     }
 
     @Test
+    fun `asType casts type to supertype`() {
+        val option = optionOf("value")
+
+        val result = option.asType<CharSequence>()
+
+        assertThat(result).isEqualTo(option)
+    }
+
+    @Test
+    fun `asType returns None if given supertype is not valid`() {
+        val option = optionOf("value")
+
+        val result = option.asType<Int>()
+
+        assertThat(result).isEqualTo(None)
+    }
+
+    @Test
+    fun `asType on None returns None`() {
+        assertThat(None.asType<Int>()).isEqualTo(None)
+    }
+
+    @Test
     fun `ifSome performs action with value when Some`() {
         val value = "value"
         val action: (String) -> Unit = mock()
