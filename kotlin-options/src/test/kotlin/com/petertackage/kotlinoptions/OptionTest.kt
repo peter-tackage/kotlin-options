@@ -58,9 +58,14 @@ class OptionTest {
     fun `asType returns None if given supertype is not valid`() {
         val option = optionOf("value")
 
-        val result = option.asType<Integer>()
+        val result = option.asType<Int>()
 
         assertThat(result).isEqualTo(None)
+    }
+
+    @Test
+    fun `asType on None returns None`() {
+        assertThat(None.asType<Int>()).isEqualTo(None)
     }
 
     @Test
