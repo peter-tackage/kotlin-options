@@ -10,9 +10,7 @@ import retrofit2.Call
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.http.GET
-import java.io.IOException
 import java.lang.reflect.Type
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 /**
