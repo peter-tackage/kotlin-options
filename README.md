@@ -21,7 +21,7 @@ Create an Option from a nullable type using `optionOf`:
 
 Transform the value by chaining functional operators as required:
 
-``` Kotlin
+```Kotlin
     getCurrentUserId()
             .filter { it.isNotEmpty() && it != "Invalid Id" }
             .flatMap { getCurrentUserFromDatabase(it) }
@@ -35,9 +35,8 @@ Transform the value by chaining functional operators as required:
 Extension methods are provided to transform to transform `Iterable`s.
 
 ```Kotlin
-    val optionListWithNone : List<Option<String>> = listOf(optionOf("abc"), None)
-    
-    val listWithout : List<String> = listWithNone.filterIfSome()
+    val optionListWithNone : List<Option<String>> = listOf(optionOf("abc"), None) 
+    val listWithout : List<String> = listWithNone.filterIfSome() // `None` elements removed
 ```
 
 ## RxJava 2 Extensions
