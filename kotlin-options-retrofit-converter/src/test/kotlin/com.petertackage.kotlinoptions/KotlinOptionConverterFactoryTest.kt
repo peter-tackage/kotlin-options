@@ -29,7 +29,8 @@ class KotlinOptionConverterFactoryTest {
         @GET("/") fun `object`(): Call<Any>
     }
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
         val retrofit = Retrofit.Builder()
                 .baseUrl(server.url("/"))
                 .addConverterFactory(KotlinOptionConverterFactory.create())
