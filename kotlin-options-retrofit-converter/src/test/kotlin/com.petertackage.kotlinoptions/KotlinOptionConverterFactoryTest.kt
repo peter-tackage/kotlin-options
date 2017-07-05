@@ -46,7 +46,6 @@ class KotlinOptionConverterFactoryTest {
 
         val option: Option<Any> = service.option().execute().body()!!
 
-        assertNotNull(option)
         assert(option == None)
     }
 
@@ -64,7 +63,6 @@ class AlwaysNullConverterFactory : Converter.Factory() {
     override fun responseBodyConverter(type: Type, annotations: Array<Annotation>,
                                        retrofit: Retrofit): Converter<ResponseBody, *> {
         return object : Converter<ResponseBody, Any> {
-            @Throws(IOException::class)
             override fun convert(value: ResponseBody): Any? {
                 return null
             }
