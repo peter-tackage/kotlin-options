@@ -59,11 +59,6 @@ class KotlinOptionConverterFactoryTest {
 
 class AlwaysNullConverterFactory : Converter.Factory() {
     override fun responseBodyConverter(type: Type, annotations: Array<Annotation>,
-                                       retrofit: Retrofit): Converter<ResponseBody, *> {
-        return object : Converter<ResponseBody, Any> {
-            override fun convert(value: ResponseBody): Any? {
-                return null
-            }
-        }
-    }
+                                       retrofit: Retrofit): Converter<ResponseBody, *>
+            = Converter<ResponseBody, Any> { null }
 }
