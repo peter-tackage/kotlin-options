@@ -11,6 +11,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import java.lang.reflect.Type
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 /**
@@ -40,16 +41,17 @@ class KotlinOptionConverterFactoryTest {
     }
 
     @Test
-    fun option() {
+    fun `returns None when Option and null body`() {
         server.enqueue(MockResponse())
 
-        val option: Option<Any> = service.option().execute().body()!!
+        val option = service.option().execute().body()
 
+        assertNotNull(option)
         assert(option == None)
     }
 
     @Test
-    fun onlyMatchesOption() {
+    fun `returns null when non-Option and null body`() {
         server.enqueue(MockResponse())
 
         val body = service.`object`().execute().body()
