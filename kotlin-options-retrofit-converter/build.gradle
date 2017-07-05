@@ -1,0 +1,22 @@
+group 'com.petertackage.kotlinoptions'
+version "$library_version"
+
+ext.retrofit_version = "2.3.0"
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    compile project(':kotlin-options')
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "junit:junit:$junit_version"
+    testCompile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
+}
