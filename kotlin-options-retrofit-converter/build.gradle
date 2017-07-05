@@ -1,4 +1,4 @@
-group 'com.petertackage.kotlinoptions.retrofit-converter'
+group 'com.petertackage.kotlinoptions'
 version "$library_version"
 
 repositories {
