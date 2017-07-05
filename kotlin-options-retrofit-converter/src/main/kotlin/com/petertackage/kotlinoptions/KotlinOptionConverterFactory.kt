@@ -8,8 +8,10 @@ import java.lang.reflect.Type
 
 class KotlinOptionConverterFactory : Converter.Factory() {
 
-    fun create(): KotlinOptionConverterFactory {
-        return KotlinOptionConverterFactory()
+    companion object {
+        fun create(): KotlinOptionConverterFactory {
+            return KotlinOptionConverterFactory()
+        }
     }
 
     override fun responseBodyConverter(type: Type,
