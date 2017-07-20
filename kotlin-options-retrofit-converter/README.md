@@ -1,7 +1,16 @@
 # Kotlin Options Retrofit 2 Converter
 
-A module which provides a [Retrofit 2](https://github.com/square/moshi/) `Converter` to allow creation of `Option` instances for calls with a `null` response body.
+A module which provides a [Retrofit 2](https://github.com/square/retrofit/) `Converter` to allow creation of `Option` instances for calls with a `null` response body.
 
+You can use it to define Retrofit interfaces such as:
+ 
+```kotlin
+interface Service {
+        @GET("/call") fun option(): Call<Option<MyClass>>
+        @GET("/observable") fun option(): Observable<Option<MyClass>>
+    }
+```
+    
 Add to your Retrofit instance by creating an instance of `KotlinOptionConverter`:
 
 ```kotlin
