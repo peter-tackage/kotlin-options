@@ -38,7 +38,7 @@ Extension methods are provided to transform to transform `Iterable`s.
     val optionListWithNone : List<Option<String>> = listOf(optionOf("abc"), None) 
     val listWithout : List<String> = listWithNone.filterIfSome() // `None` elements removed
 ```
-## Optional Modules
+## Extra Modules
 
 ### RxJava 2 Extensions
 
