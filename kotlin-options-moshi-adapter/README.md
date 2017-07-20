@@ -1,8 +1,12 @@
 # Kotlin Options Moshi Adapter
 
-Provides a [Moshi](https://github.com/square/moshi/) Converter to allow direct translation from JSON into an `Option` type value.
+A module which provides a [Moshi](https://github.com/square/moshi/) `AdapterFactory` to allow direct translation from JSON into an `Option` type value.
 
-This allows you to have `Option` properties to handle nullable and optional (non-present) fields.
+This allows you to have `Option` properties in your classes to handle nullable and optional (non-present) fields, such as:
+
+```kotlin
+    data class Data(val optionField: Option<Int>)
+```
 
 Add to your Moshi instance by creating an instance of `OptionAdapterFactory`:
 
@@ -11,11 +15,9 @@ Add to your Moshi instance by creating an instance of `OptionAdapterFactory`:
                  /** etc **/
                 .add(OptionAdapterFactory()) // must be before KotlinJsonAdapterFactory
                 .add(KotlinJsonAdapterFactory())
-                /** etc **/
+                 /** etc **/
                 .build()
 ```
-
-
 
 ## Acknowledgements
 
