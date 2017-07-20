@@ -1,21 +1,14 @@
-# Kotlin Options Moshi Adapter
+# Kotlin Options Retrofit 2 Converter
 
-A module which provides a [Moshi](https://github.com/square/moshi/) `AdapterFactory` to allow direct translation from JSON into an `Option` type value.
+A module which provides a [Retrofit 2](https://github.com/square/moshi/) `Converter` to allow creation of `Option` instances for calls with a `null` response body.
 
-This allows you to have `Option` properties in your classes to handle nullable and optional (non-present) JSON properties, such as:
-
-```kotlin
-    data class Data(val optionField: Option<Int>)
-```
-
-Add to your Moshi instance by creating an instance of `OptionAdapterFactory`:
+Add to your Retrofit instance by creating an instance of `KotlinOptionConverter`:
 
 ```kotlin
-        val moshi = Moshi.Builder()
-                 /** etc **/
-                .add(OptionAdapterFactory()) // must be before KotlinJsonAdapterFactory
-                .add(KotlinJsonAdapterFactory())
-                 /** etc **/
+        val retrofit = Retrofit.Builder()
+                /** etc **/
+                .addConverterFactory(KotlinOptionConverterFactory.create())
+                /** etc **/
                 .build()
 ```
 
