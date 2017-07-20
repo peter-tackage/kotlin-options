@@ -136,7 +136,7 @@ sealed class Option<out T : Any> {
     /**
      * @return A non-null representation of the value.
      *
-     * @throws [Exception] when `this` is [None].
+     * @throws [RuntimeException] when `this` is [None].
      */
     fun getUnsafe(): T {
         return when (this) {
