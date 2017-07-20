@@ -38,10 +38,11 @@ Extension methods are provided to transform to transform `Iterable`s.
     val optionListWithNone : List<Option<String>> = listOf(optionOf("abc"), None) 
     val listWithout : List<String> = listWithNone.filterIfSome() // `None` elements removed
 ```
+## Extra Modules
 
-## RxJava 2 Extensions
+### RxJava 2 Extensions
 
-Extension methods are also provided to transform RxJava 2 streams, including `Observable`, `Flowable`, `Single` and `Maybe`.
+Extension methods are also provided to transform RxJava 2 streams, including `Observable`, `Flowable`, `Single` and `Maybe` using [kotlin-options-rxjava2-extensions](https://github.com/peter-tackage/kotlin-options/tree/master/kotlin-options-rxjava2-extensions).
 
 You can use this to filter an `Option` to its value:
 
@@ -51,29 +52,23 @@ You can use this to filter an `Option` to its value:
         .subscribe { println(it.length) } // use String value
 ```
 
-## Testing
+### Test Assertions
 
-You can test your Options using: 
+You can test your Options using the [kotlin-options-assertions](https://github.com/peter-tackage/kotlin-options/tree/master/kotlin-options-assertions) module.
 
 ```Kotlin
     val someOption = optionOf("abc") 
     assertThat(someOption).hasValue("abc")
 ```
 
-or directly:
+### Moshi Adapter
 
-```Kotlin
-    val someOption = optionOf("abc")  
-    someOption.assertHasValue("abc")
-```
-    
-You can also use a predicate:
+The [kotlin-options-moshi-adapter](https://github.com/peter-tackage/kotlin-options/tree/master/kotlin-options-moshi-adapter/) module provides serialization between JSON and `Option` using [Moshi](https://github.com/square/moshi/).
 
-```Kotlin
-    val someOption = optionOf("abc")   
-    someOption.assertHasValue { it.length > 2 }
-```
-    
+### Retrofit Converter
+
+The [kotlin-options-moshi-adapter](https://github.com/peter-tackage/kotlin-options/tree/master/kotlin-options-moshi-adapter/) module provides [Retrofit 2](https://github.com/square/retrofit/) calls which return `Option`.
+
 ## Download
 
 Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.7).
