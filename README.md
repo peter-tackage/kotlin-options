@@ -53,25 +53,11 @@ You can use this to filter an `Option` to its value:
 
 ## Testing
 
-You can test your Options using: 
+You can test your Options using the [kotlin-options-assertions](https://github.com/peter-tackage/kotlin-options/tree/master/kotlin-options-assertions) module.
 
 ```Kotlin
     val someOption = optionOf("abc") 
     assertThat(someOption).hasValue("abc")
-```
-
-or directly:
-
-```Kotlin
-    val someOption = optionOf("abc")  
-    someOption.assertHasValue("abc")
-```
-    
-You can also use a predicate:
-
-```Kotlin
-    val someOption = optionOf("abc")   
-    someOption.assertHasValue { it.length > 2 }
 ```
     
 ## Download
