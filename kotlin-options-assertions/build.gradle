@@ -1,11 +1,11 @@
-group 'com.petertackage.kotlinoptions'
-version "$library_version"
+group GROUP
+version VERSION_NAME
 
 apply plugin: 'kotlin'
 
 dependencies {
     compile project(':kotlin-options')
 
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile "junit:junit:$junit_version"
+    testCompile deps.kotlin_test_junit
+    testCompile deps.junit
 }

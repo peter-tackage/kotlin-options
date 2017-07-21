@@ -1,14 +1,17 @@
-group 'com.petertackage.kotlinoptions'
-version "$library_version"
+group GROUP
+version VERSION_NAME
+
+ext {
+    deps += ['rxjava2': "io.reactivex.rxjava2:rxjava:2.1.0"]
+}
 
 apply plugin: 'kotlin'
 
 dependencies {
     compile project(':kotlin-options')
-    compileOnly 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compileOnly deps.rxjava2
 
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile "junit:junit:$junit_version"
-    // Need to have twice: https://discuss.gradle.org/t/compileonly-dependencies-are-not-available-in-tests/15366/5
-    testCompile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    testCompile deps.kotlin_test_junit
+    testCompile deps.junit
+    testCompile deps.rxjava2
 }

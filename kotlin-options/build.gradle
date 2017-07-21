@@ -1,14 +1,22 @@
-group 'com.petertackage.kotlinoptions'
-version "$library_version"
+group GROUP
+version VERSION_NAME
+
+ext {
+    deps += ['assertj'       : "org.assertj:assertj-core:3.6.2",
+             'mockito'       : "org.mockito:mockito-core:2.7.22",
+             'mockito_kotlin': "com.nhaarman:mockito-kotlin:1.5.0"]
+
+}
 
 apply plugin: 'kotlin'
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile deps.kotlin
 
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile "junit:junit:$junit_version"
-    testCompile 'org.assertj:assertj-core:3.6.2'
-    testCompile 'org.mockito:mockito-core:2.7.22'
-    testCompile 'com.nhaarman:mockito-kotlin:1.5.0', { exclude group: 'org.jetbrains.kotlin' }
+    testCompile deps.kotlin_test_junit
+    testCompile deps.junit
+
+    testCompile deps.assertj
+    testCompile deps.mockito
+    testCompile deps.mockito_kotlin, { exclude group: 'org.jetbrains.kotlin' }
 }
