@@ -1,21 +1,20 @@
-group 'com.petertackage.kotlinoptions'
-version "$library_version"
+group GROUP
+version VERSION_NAME
 
-ext.moshi_version = "1.5.0"
-
-repositories {
-    maven { url 'https://jitpack.io' }
+ext {
+    moshi_version = "1.5.0"
+    deps += ['moshi'       : "com.squareup.moshi:moshi:$moshi_version",
+             'moshi_kotlin': "com.squareup.moshi:moshi-kotlin:$moshi_version"]
 }
 
 apply plugin: 'kotlin'
 
 dependencies {
     compile project(':kotlin-options')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly "com.squareup.moshi:moshi:$moshi_version"
+    compileOnly deps.moshi
 
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile "junit:junit:$junit_version"
-    testCompile "com.squareup.moshi:moshi:$moshi_version"
-    testCompile "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    testCompile deps.kotlin_test_junit
+    testCompile deps.junit
+    testCompile deps.moshi
+    testCompile deps.moshi_kotlin
 }
