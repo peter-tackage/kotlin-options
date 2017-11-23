@@ -77,7 +77,7 @@ Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.7).
 
 The API of this library was inspired by the Java 6 compatible [Options](https://github.com/tomaszpolanski/Options) library written by [Tomek Polanski](https://twitter.com/tpolansk).
 
-If you want an Optional without the much of the functional behaviour, check out [Koptional](https://github.com/gojuno/koptional).
+If you want an Optional without much of the functional behaviour, check out [Koptional](https://github.com/gojuno/koptional).
 
 ## Acknowledgements
 
