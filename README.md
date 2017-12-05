@@ -71,7 +71,7 @@ The [kotlin-options-moshi-adapter](https://github.com/peter-tackage/kotlin-optio
 
 ## Download
 
-Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.7).
+Available on [Jitpack](https://jitpack.io/#peter-tackage/kotlin-options/0.9).
 
 ## Alternatives
 
