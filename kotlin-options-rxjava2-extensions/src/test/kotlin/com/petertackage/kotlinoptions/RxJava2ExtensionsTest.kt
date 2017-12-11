@@ -9,7 +9,7 @@ import org.junit.Test
 class RxJava2ExtensionsTest {
 
     /*
-     * filterIfSome
+     * filterNotNone
      */
 
     @Test

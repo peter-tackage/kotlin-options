@@ -36,7 +36,7 @@ Extension methods are provided to transform to transform `Iterable`s.
 
 ```Kotlin
     val optionListWithNone : List<Option<String>> = listOf(optionOf("abc"), None) 
-    val listWithout : List<String> = listWithNone.filterIfSome() // `None` elements removed
+    val listWithout : List<String> = listWithNone.filterNotNone() // `None` elements removed
 ```
 ## Extra Modules
 
@@ -48,7 +48,7 @@ You can use this to filter an `Option` to its value:
 
 ```Kotlin
     Observable.just(optionOf("abc"))
-        .filterIfSome()
+        .filterNotNone()
         .subscribe { println(it.length) } // use String value
 ```
 

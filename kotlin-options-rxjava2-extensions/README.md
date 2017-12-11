@@ -6,7 +6,7 @@ You can use this to filter an `Option` to its value:
 
 ```Kotlin
     Observable.just(optionOf("abc"))
-        .filterIfSome()
+        .filterNotNone()
         .subscribe { value : String -> println(value.length) }
 ```
 
