@@ -13,209 +13,209 @@ class RxJava2ExtensionsTest {
      */
 
     @Test
-    fun `filterIfSome on Observable includes when Some`() {
+    fun `filterNotNone on Observable includes when Some`() {
         val value = "abc"
         Observable.just(optionOf(value))
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome on Observable excludes when None`() {
+    fun `filterNotNone on Observable excludes when None`() {
         val none: Option<*> = None
         Observable.just(none)
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Observable includes when Some and predicate True`() {
+    fun `filterNotNone with predicate on Observable includes when Some and predicate True`() {
         val value = "abc"
         Observable.just(optionOf(value))
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome with predicate on Observable excludes when Some and predicate False`() {
+    fun `filterNotNone with predicate on Observable excludes when Some and predicate False`() {
         Observable.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Observable excludes when None and predicate True`() {
+    fun `filterNotNone with predicate on Observable excludes when None and predicate True`() {
         val none: Option<*> = None
         Observable.just(none)
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Observable excludes when None and predicate False`() {
+    fun `filterNotNone with predicate on Observable excludes when None and predicate False`() {
         Observable.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome on Flowable includes when Some`() {
+    fun `filterNotNone on Flowable includes when Some`() {
         val value = "abc"
         Flowable.just(optionOf(value))
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome on Flowable excludes when None`() {
+    fun `filterNotNone on Flowable excludes when None`() {
         val none: Option<*> = None
         Flowable.just(none)
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Flowable includes when Some and predicate True`() {
+    fun `filterNotNone with predicate on Flowable includes when Some and predicate True`() {
         val value = "abc"
         Flowable.just(optionOf(value))
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome with predicate on Flowable excludes when Some and predicate False`() {
+    fun `filterNotNone with predicate on Flowable excludes when Some and predicate False`() {
         Flowable.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Flowable excludes when None and predicate True`() {
+    fun `filterNotNone with predicate on Flowable excludes when None and predicate True`() {
         val none: Option<*> = None
         Flowable.just(none)
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Flowable excludes when None and predicate False`() {
+    fun `filterNotNone with predicate on Flowable excludes when None and predicate False`() {
         Flowable.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome on Single includes when Some`() {
+    fun `filterNotNone on Single includes when Some`() {
         val value = "abc"
         Single.just(optionOf(value))
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome on Single excludes when None`() {
+    fun `filterNotNone on Single excludes when None`() {
         val none: Option<*> = None
         Single.just(none)
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Single includes when Some and predicate True`() {
+    fun `filterNotNone with predicate on Single includes when Some and predicate True`() {
         val value = "abc"
         Single.just(optionOf(value))
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome with predicate on Single excludes when Some and predicate False`() {
+    fun `filterNotNone with predicate on Single excludes when Some and predicate False`() {
         Single.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Single excludes when None and predicate True`() {
+    fun `filterNotNone with predicate on Single excludes when None and predicate True`() {
         val none: Option<*> = None
         Single.just(none)
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Single excludes when None and predicate False`() {
+    fun `filterNotNone with predicate on Single excludes when None and predicate False`() {
         Single.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome on Maybe includes when Some`() {
+    fun `filterNotNone on Maybe includes when Some`() {
         val value = "abc"
         Maybe.just(optionOf(value))
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome on Maybe excludes when None`() {
+    fun `filterNotNone on Maybe excludes when None`() {
         val none: Option<*> = None
         Maybe.just(none)
-                .filterIfSome()
+                .filterNotNone()
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Maybe includes when Some and predicate True`() {
+    fun `filterNotNone with predicate on Maybe includes when Some and predicate True`() {
         val value = "abc"
         Maybe.just(optionOf(value))
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertValue(value)
     }
 
     @Test
-    fun `filterIfSome with predicate on Maybe excludes when Some and predicate False`() {
+    fun `filterNotNone with predicate on Maybe excludes when Some and predicate False`() {
         Maybe.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Maybe excludes when None and predicate True`() {
+    fun `filterNotNone with predicate on Maybe excludes when None and predicate True`() {
         val none: Option<*> = None
         Maybe.just(none)
-                .filterIfSome { true }
+                .filterNotNone { true }
                 .test()
                 .assertNoValues()
     }
 
     @Test
-    fun `filterIfSome with predicate on Maybe excludes when None and predicate False`() {
+    fun `filterNotNone with predicate on Maybe excludes when None and predicate False`() {
         Maybe.just(optionOf("abc"))
-                .filterIfSome { false }
+                .filterNotNone { false }
                 .test()
                 .assertNoValues()
     }
