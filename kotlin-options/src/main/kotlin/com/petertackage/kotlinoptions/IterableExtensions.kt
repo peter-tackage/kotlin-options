@@ -4,7 +4,7 @@ package com.petertackage.kotlinoptions
  * @return an [Iterable] containing all elements of the original [Iterable] which are [Some].
  */
 fun <T : Any> Iterable<Option<T>>.filterNotNone(): Iterable<T> {
-    return filter { it is Some }.map { it.toNullable()!! }
+    return mapNotNull(Option<T>::toNullable)
 }
 
 /** @Deprecated
@@ -20,7 +20,7 @@ fun <T : Any> Iterable<Option<T>>.filterIfSome(): Iterable<T> {
  * @return an [Iterable] containing all elements of the original [Iterable] which are [Some] and that satisfy [predicate].
  */
 fun <T : Any> Iterable<Option<T>>.filterNotNone(predicate: (T) -> Boolean): Iterable<T> {
-    return filter { it is Some }.map { it.toNullable()!! }.filter(predicate)
+    return mapNotNull(Option<T>::toNullable).filter(predicate)
 }
 
 /** @Deprecated
