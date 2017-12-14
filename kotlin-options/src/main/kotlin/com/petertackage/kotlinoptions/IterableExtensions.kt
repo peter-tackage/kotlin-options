@@ -10,7 +10,7 @@ fun <T : Any> Iterable<Option<T>>.filterNotNone(): Iterable<T> {
 /** @Deprecated
  * @return an [Iterable] containing all elements of the original [Iterable] which are [Some].
  */
-@Deprecated("Does not alight with kotlin naming for extensions functions in Iterable",
+@Deprecated("Does not alight with kotlin naming convention",
         ReplaceWith("filterNotNone()"))
 fun <T : Any> Iterable<Option<T>>.filterIfSome(): Iterable<T> {
     return filterNotNone()
@@ -26,7 +26,7 @@ fun <T : Any> Iterable<Option<T>>.filterNotNone(predicate: (T) -> Boolean): Iter
 /** @Deprecated
  * @return an [Iterable] containing all elements of the original [Iterable] which are [Some] and that satisfy [predicate].
  */
-@Deprecated("Does not alight with kotlin naming for extensions functions in Iterable",
+@Deprecated("Does not alight with kotlin naming convention",
         ReplaceWith("filterNotNone(predicate)"))
 fun <T : Any> Iterable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Iterable<T> {
     return filterNotNone(predicate)
