@@ -6,57 +6,95 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 /*
- * filterIfSome
+ * filterNotNone
  */
 
-fun <T : Any> Observable<Option<T>>.filterIfSome(): Observable<T> {
-    return filter { it is Some }.map { it.getUnsafe() }
-}
+/////////////////////////////
+///////// Observable ////////
+/////////////////////////////
 
-fun <T : Any> Observable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Observable<T> {
-    return filterIfSome().filter(predicate)
-}
+fun <T : Any> Observable<Option<T>>.filterNotNone(): Observable<T> =
+        filter { it is Some }.map { it.getUnsafe() }
 
-fun <T : Any> Flowable<Option<T>>.filterIfSome(): Flowable<T> {
-    return filter { it is Some }.map { it.getUnsafe() }
-}
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone()"))
+fun <T : Any> Observable<Option<T>>.filterIfSome(): Observable<T> = filterNotNone()
 
-fun <T : Any> Flowable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Flowable<T> {
-    return filterIfSome().filter(predicate)
-}
+fun <T : Any> Observable<Option<T>>.filterNotNone(predicate: (T) -> Boolean): Observable<T> =
+        filter { it is Some }.map { it.getUnsafe() }.filter(predicate)
 
-fun <T : Any> Single<Option<T>>.filterIfSome(): Maybe<T> {
-    return filter { it is Some }.map { it.getUnsafe() }
-}
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone(predicate)"))
+fun <T : Any> Observable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Observable<T> =
+        filterNotNone(predicate)
 
-fun <T : Any> Single<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> {
-    return filterIfSome().filter(predicate)
-}
+/////////////////////////////
+///////// Flowable //////////
+/////////////////////////////
 
-fun <T : Any> Maybe<Option<T>>.filterIfSome(): Maybe<T> {
-    return filter { it is Some }.map { it.getUnsafe() }
-}
+fun <T : Any> Flowable<Option<T>>.filterNotNone(): Flowable<T> =
+        filter { it is Some }.map { it.getUnsafe() }
 
-fun <T : Any> Maybe<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> {
-    return filterIfSome().filter(predicate)
-}
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone()"))
+fun <T : Any> Flowable<Option<T>>.filterIfSome(): Flowable<T> = filterNotNone()
+
+fun <T : Any> Flowable<Option<T>>.filterNotNone(predicate: (T) -> Boolean): Flowable<T> =
+        filter { it is Some }.map { it.getUnsafe() }.filter(predicate)
+
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone(predicate)"))
+fun <T : Any> Flowable<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Flowable<T> =
+        filterNotNone(predicate)
+
+/////////////////////////////
+///////// Single ////////////
+/////////////////////////////
+
+fun <T : Any> Single<Option<T>>.filterNotNone(): Maybe<T> =
+        filter { it is Some }.map { it.getUnsafe() }
+
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone()"))
+fun <T : Any> Single<Option<T>>.filterIfSome(): Maybe<T> = filterNotNone()
+
+fun <T : Any> Single<Option<T>>.filterNotNone(predicate: (T) -> Boolean): Maybe<T> =
+        filterNotNone().filter(predicate)
+
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone(predicate)"))
+fun <T : Any> Single<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> =
+        filterNotNone(predicate)
+
+/////////////////////////////
+///////// Maybe /////////////
+/////////////////////////////
+
+fun <T : Any> Maybe<Option<T>>.filterNotNone(): Maybe<T> =
+        filter { it is Some }.map { it.getUnsafe() }
+
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone()"))
+fun <T : Any> Maybe<Option<T>>.filterIfSome(): Maybe<T> = filterNotNone()
+
+fun <T : Any> Maybe<Option<T>>.filterNotNone(predicate: (T) -> Boolean): Maybe<T> =
+        filterNotNone().filter(predicate)
+
+@Deprecated("Does not conform to Kotlin naming convention",
+        ReplaceWith("filterNotNone(predicate)"))
+fun <T : Any> Maybe<Option<T>>.filterIfSome(predicate: (T) -> Boolean): Maybe<T> =
+        filterNotNone(predicate)
 
 /*
  * filterIfNone
  */
 
-fun <T : Any> Observable<Option<T>>.filterIfNone(): Observable<Unit> {
-    return filter { it is None }.map { Unit }
-}
+fun <T : Any> Observable<Option<T>>.filterIfNone(): Observable<Unit> =
+        filter { it is None }.map { Unit }
 
-fun <T : Any> Flowable<Option<T>>.filterIfNone(): Flowable<Unit> {
-    return filter { it is None }.map { Unit }
-}
+fun <T : Any> Flowable<Option<T>>.filterIfNone(): Flowable<Unit> =
+        filter { it is None }.map { Unit }
 
-fun <T : Any> Single<Option<T>>.filterIfNone(): Maybe<Unit> {
-    return filter { it is None }.map { Unit }
-}
+fun <T : Any> Single<Option<T>>.filterIfNone(): Maybe<Unit> = filter { it is None }.map { Unit }
 
-fun <T : Any> Maybe<Option<T>>.filterIfNone(): Maybe<Unit> {
-    return filter { it is None }.map { Unit }
-}
+fun <T : Any> Maybe<Option<T>>.filterIfNone(): Maybe<Unit> = filter { it is None }.map { Unit }
