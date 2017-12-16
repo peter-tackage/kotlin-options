@@ -1,6 +1,6 @@
 buildscript {
 
-    ext.library_version = '0.9'
+    ext.library_version = '0.10'
 
     ext.kotlin_version = '1.2.0'
     ext.junit_version = '4.11'
