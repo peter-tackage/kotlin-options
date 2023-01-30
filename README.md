@@ -15,7 +15,7 @@ Create an Option from a nullable type using `optionOf`:
 ```Kotlin
     fun getCurrentUserId() : Option<String> {
         val userId : String? = getUserId() // something which might return null
-        return optionOf(value)
+        return optionOf(userId)
     }
 ```
 
